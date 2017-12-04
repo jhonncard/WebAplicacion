@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebAplicacion.Models.LoggersViewModel>
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="row">
+    <div class="form-inline">
+        @Html.DisplayNameFor(model => model.fecha)
+        <div class="form-group">
+            @{              
+                foreach (var item in ViewBag.listopciones)
+                {
+                    Html.RadioButton(a => a.item,  true)@:Male;
+                }
+
+            }             
+        </div>
+        @Html.DisplayNameFor(model => model.fecha)
+        
+        @Html.DisplayNameFor(model => model.fecha)
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<table class="table">
+
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detallles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+      
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.detallles)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+       
+        <td>
+      </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,55 @@
+﻿@model WebAplicacion.Models.LoggersViewModel
+
+@{ 
+   ViewBag.relaionadas
+  
+        
+        
+        
+        
+ }
+
+
+
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detallles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detallles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Relacionada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Relacionada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
