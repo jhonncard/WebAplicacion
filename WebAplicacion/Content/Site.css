@@ -1,7 +1,13 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+
 }
+
+.navbar-inverse {
+    background-color: #3598D4;
+}
+   
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -26,11 +32,30 @@ textarea {
 .separador {
      padding-left:69px;
       padding-right: 15px;
-    color:darkred;
- background-color:lightgray;
+    color:white;
+ background-color: #3598D4;
 }
 
 
 .titulos {
      padding-left:55px;
+}
+.control-label {
+    text-align:right;
+}
+.display-label, 
+.editor-label 
+{
+      display:inline-block;
+      width: 200px;    
+      text-align: right;   
+      margin-right: 10px;
+
+}
+
+.display-field, 
+.editor-field 
+{
+    display:inline-block;
+     margin: 0.5em 0 0 0;
 }

@@ -1,65 +1,54 @@
 ﻿@model IEnumerable<WebAplicacion.Models.LoggersViewModel>
 
-
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-<div class="row">
-    <div class="form-inline">
-        @Html.DisplayNameFor(model => model.fecha)
-        <div class="form-group">
-            @{              
-                foreach (var item in ViewBag.listopciones)
-                {
-                    Html.RadioButton(a => a.item,  true)@:Male;
-                }
-
-            }             
-        </div>
-        @Html.DisplayNameFor(model => model.fecha)
-        
-        @Html.DisplayNameFor(model => model.fecha)
-
-
-
-
-
-
-
-    </div>
-</div>
-
-<table class="table">
-
-    <tr class="success">
+@{
+  int i = 0;
+}
+<table class="table table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayName("Nr°")
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.fecha)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.detallles)
+            @Html.DisplayName("Hora")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Usuario)
         </th>
-      
+       
+        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.fecha)
+            @*@{i++;}
+            @Html.Display(String.Format("{0}",i))*@
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.detallles)
+            @Html.DisplayFor(modelItem => item.fecha))
+           @*@{ Convert.ToDateTime(@Html.DisplayFor(modelItem => item.fecha)).Date}*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)          
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Usuario)
         </td>
+        
        
-        <td>
-      </td>
     </tr>
 }
 

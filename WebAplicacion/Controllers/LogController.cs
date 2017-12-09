@@ -6,12 +6,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WebAplicacion.Controllers
 {
     public class LogController : Controller
     {
+       
         // GET: Factoring/Log
         public ActionResult Index()
         {
@@ -19,14 +21,70 @@ namespace WebAplicacion.Controllers
         }
 
         // GET: Factoring/Log/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(ReporteViewModel repo)
         {
-            var httpcliente = new HttpClient();
-         var json=await   httpcliente.GetStringAsync("urldel servicio");
-         // var lista = JsonHelper.JsonDeserialize(json)  List<LoggersViewModel> 
-            return View();
+            List<LoggersViewModel> searchResults = new List<LoggersViewModel>();
+
+            string buscar = "";
+
+            if (repo.Clientes)
+            {
+                buscar = "Clientes";
+                List<LoggersViewModel> x = await buscarlog(buscar);
+                searchResults.AddRange(x);
+            }
+            else if (repo.Clientes)
+            {
+                buscar = "Deudores";
+                List<LoggersViewModel> x = await buscarlog(buscar);
+                searchResults.AddRange(x);
+            }
+            else if (repo.Condiciones)
+            {
+                buscar = "Condiciones";
+                List<LoggersViewModel> x = await buscarlog(buscar);
+                searchResults.AddRange(x);
+            }
+            int i = 0;
+            foreach (var Item in searchResults)
+            {
+                Item.Id = ++i;
+                Item.fecha = Convert.ToDateTime(Item.fecha).ToString();
+
+            }
+            return View(searchResults);
         }
 
+
+        private async Task<List<LoggersViewModel>> buscarlog(string buscar  )
+        {
+            List<LoggersViewModel> searchResults = new List<LoggersViewModel>();
+
+            try
+            {
+                var cliente = new HttpClient();
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarLogFactoring/Condiciones/" + buscar);
+                JObject desjson = JObject.Parse(json);
+                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultaLogFactoring"].Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    LoggersViewModel searchResult = result.ToObject<LoggersViewModel>();
+                    searchResults.Add(searchResult);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LoggersViewModel searchResult = new LoggersViewModel();
+                searchResults.Add(searchResult);
+                throw ex;
+            }
+            return searchResults;
+        }
       
     }
 }

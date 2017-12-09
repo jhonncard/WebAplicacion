@@ -6,12 +6,13 @@ using System.Web;
 
 namespace WebAplicacion.Models
 {
-    public class LoggersViewModel
+    public class LogersViewModel
     {
+
         [Display]
         public int Id { get; set; }
 
-        public string  fecha { get; set; }
+        public   DateTime   fecha { get; set; }
   
         public String  Descripcion  { get; set; }
 

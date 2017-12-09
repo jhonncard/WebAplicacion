@@ -160,10 +160,12 @@
     </Compile>
     <Compile Include="Models\ClasificacionViewModel.cs" />
     <Compile Include="Models\CondicionesFactoringViewModel.cs" />
+    <Compile Include="Models\LogersViewMode.cs" />
     <Compile Include="Models\LoggersViewModel.cs" />
     <Compile Include="Models\Mant_ClientesViewModel.cs" />
     <Compile Include="Models\Mant_DuedoresviewModel.cs" />
     <Compile Include="Models\OperacionViewModel.cs" />
+    <Compile Include="Models\ReporteViewModel.cs" />
     <Compile Include="Models\TipoMonedaViewModel.cs" />
     <Compile Include="Models\TipoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +214,7 @@
     <Content Include="Views\Condiciones\Index.cshtml" />
     <Content Include="Views\Deudores\Index.cshtml" />
     <Content Include="Views\Log\Details.cshtml" />
+    <Content Include="Views\Condiciones\Edit.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +229,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Factoring.Negocios\Factoring.Negocios.csproj">
+      <Project>{396b1540-908d-4da9-bd02-2f4eaf23f1be}</Project>
+      <Name>Factoring.Negocios</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

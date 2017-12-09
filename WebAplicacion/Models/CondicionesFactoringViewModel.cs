@@ -9,9 +9,9 @@ namespace WebAplicacion.Models
         public int id { get; set; }
         /* FACTURING */
         [Required]
-        [Display(Name = "Empresas Pyme") ]
+        [Display(Name = "Empresas Pymes") ]
         [Range (0,100,ErrorMessage ="Valor fuera de Rango")]
-        public Nullable<float> FactoringPyme  { get; set; }
+        public Nullable<float> FactoringPymes  { get; set; }
 
         [Required]
         [Display(Name = "Empresas Medianas")]
@@ -35,9 +35,9 @@ namespace WebAplicacion.Models
 
         /* CONFIRMING */
         [Required]
-        [Display(Name = "Empresas Pyme")]
+        [Display(Name = "Empresas Pymes")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> ConfirmingPyme { get; set; }
+        public Nullable<float> ConfirmingPymes { get; set; }
 
         [Required]
         [Display(Name = "Empresas Medianas")]
@@ -61,9 +61,9 @@ namespace WebAplicacion.Models
 
         /* COMBRANZA DELEGADA  */
         [Required]
-        [Display(Name = "Empresas Pyme")]
+        [Display(Name = "Empresas Pymes")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> CobranzaDelegadaPyme { get; set; }
+        public Nullable<float> CobranzaDelegadaPymes { get; set; }
 
         [Required]
         [Display(Name = "Empresas Medianas")]
@@ -89,36 +89,36 @@ namespace WebAplicacion.Models
         [Required]
         [Display(Name = "Bolsa de productos")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> BolsaProductos { get; set; }
+        public Nullable<float> TasaSpreadBolsaProductos { get; set; }
 
             
         [Required]
-        [Display(Name = "Pyme")]
+        [Display(Name = "Pymes")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> Comision_pyme { get; set; }
+        public Nullable<float> ComisionPyme { get; set; }
         
         [Required]
         [Display(Name = "Banca Empresa")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> Comision_BancaEmpresa { get; set; }
+        public Nullable<float> ComisionBancaEmpresa { get; set; }
         
         [Required]
         [Display(Name = "Tipo Moneda")]
-        public virtual string Comision_TipoMoneda { get; set; }
+        public virtual string ComisionTipoMoneda { get; set; }
         
         [Required]
         [Display(Name = "Notaría Deudor")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> Gastos_NotaríaDeudor { get; set; }
+        public Nullable<float> GastosNotariaDeudor { get; set; }
 
         [Required]
         [Display(Name = "Notaría N° Facturas")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> Gastos_Notaría_N_Facturas { get; set; }
+        public Nullable<float> GastosNotariaNFacturas { get; set; }
 
         [Required]
         [Display(Name = "Tipo Moneda")]
-        public virtual string Gastos_TipoMoneda { get; set; }
+        public virtual string GastosTipoMoneda { get; set; }
         
 
     }
