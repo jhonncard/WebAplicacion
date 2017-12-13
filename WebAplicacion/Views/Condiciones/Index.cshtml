@@ -6,7 +6,7 @@
     Html.AntiForgeryToken();
 
       <div class="form-horizontal left ">
-            <div class="form-group">@Html.HiddenFor(model => model.id)</div>
+            @*<div class="form-group">@Html.HiddenFor(model => model.id)</div>*@
             <h4>Condiciones Comerciales</h4>
             <hr />
 
@@ -186,10 +186,11 @@
                        <span class="col-md-1">$</span>
                       
                            @Html.LabelFor(model => model.ComisionTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
-                           <div class="col-md-4">
-                               @Html.EditorFor(model => model.ComisionTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })
-                               @Html.ValidationMessageFor(model => model.ComisionTipoMoneda, "", new { @class = "text-danger" })
-                           </div>
+                       <div class="col-md-4">
+                           @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
+                           @*@Html.EditorFor(model => model.ComisionTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })*@
+                           @Html.ValidationMessageFor(model => model.ComisionTipoMoneda, "", new {@class = "text-danger"})
+                       </div>
                        </div>
                    </div>
         <div class="row">
@@ -215,12 +216,14 @@
                 @Html.EditorFor(model => model.GastosNotariaDeudor, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayName("$") } })
                 @Html.ValidationMessageFor(model => model.GastosNotariaDeudor, "", new { @class = "text-danger"})
             </div>
-             <span class="col-md-1">$</span>
-            @Html.LabelFor(model => model.GastosTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.GastosTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GastosTipoMoneda, "", new { @class = "text-danger" })
-            </div>  
+                <span class="col-md-1">$</span>
+            
+                @Html.LabelFor(model => model.GastosTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
+                    @*@Html.EditorFor(model => model.GastosTipoMoneda, new {htmlAttributes = new {@class = "form-control"}})*@
+                    @Html.ValidationMessageFor(model => model.GastosTipoMoneda, "", new {@class = "text-danger"})
+                </div>  
         </div>
         </div>
         <div class="row">

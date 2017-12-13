@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection.cs" />
+    <Compile Include="Tipomoneda.cs" />
     <Compile Include="util\ClienteDto.cs" />
     <Compile Include="util\CondicionesDto.cs" />
     <Compile Include="util\DeudorDto.cs" />

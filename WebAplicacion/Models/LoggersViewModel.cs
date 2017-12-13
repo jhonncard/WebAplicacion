@@ -15,7 +15,6 @@ namespace WebAplicacion.Models
   
         public String  Descripcion  { get; set; }
 
-        [Display ]
         public String  Usuario { get; set; }
 
         public String  Relacionada { get; set; }

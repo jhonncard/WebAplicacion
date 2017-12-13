@@ -1,55 +1,46 @@
 ﻿@model IEnumerable<WebAplicacion.Models.LoggersViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 @{
   int i = 0;
 }
-<table class="table table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayName("Nr°")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayName("Hora")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </th>
-       
-        <th></th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @*@{i++;}
-            @Html.Display(String.Format("{0}",i))*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha))
-           @*@{ Convert.ToDateTime(@Html.DisplayFor(modelItem => item.fecha)).Date}*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)          
-        </td>
-         <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario)
-        </td>
-        
-       
-    </tr>
-}
+<h4>Bitacora de Cambios</h4>
+<hr/>
+<table class="table table-hover" id="tablalog">
+    <thead style="background-color:#3598D4; color :white;">
+        <tr>
+            <th>
+                @Html.DisplayName("Nr°")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+        </tr>
+    }
 
 </table>

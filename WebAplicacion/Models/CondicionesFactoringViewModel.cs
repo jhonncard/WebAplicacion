@@ -88,18 +88,18 @@ namespace WebAplicacion.Models
         
         [Required]
         [Display(Name = "Bolsa de productos")]
-        [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
+       // [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
         public Nullable<float> TasaSpreadBolsaProductos { get; set; }
 
             
         [Required]
         [Display(Name = "Pymes")]
-        [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
+       // [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
         public Nullable<float> ComisionPyme { get; set; }
         
         [Required]
         [Display(Name = "Banca Empresa")]
-        [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
+      //  [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
         public Nullable<float> ComisionBancaEmpresa { get; set; }
         
         [Required]
@@ -108,12 +108,12 @@ namespace WebAplicacion.Models
         
         [Required]
         [Display(Name = "Notaría Deudor")]
-        [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
+       // [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
         public Nullable<float> GastosNotariaDeudor { get; set; }
 
         [Required]
         [Display(Name = "Notaría N° Facturas")]
-        [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
+        //[Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
         public Nullable<float> GastosNotariaNFacturas { get; set; }
 
         [Required]
