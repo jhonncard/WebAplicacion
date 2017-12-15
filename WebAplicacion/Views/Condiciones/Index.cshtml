@@ -187,7 +187,7 @@
                       
                            @Html.LabelFor(model => model.ComisionTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
                        <div class="col-md-4">
-                           @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
+                           @Html.DropDownList("ComisionTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
                            @*@Html.EditorFor(model => model.ComisionTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })*@
                            @Html.ValidationMessageFor(model => model.ComisionTipoMoneda, "", new {@class = "text-danger"})
                        </div>
@@ -241,7 +241,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
-                <input type="" value="cancelar" class="btn btn-primary" />
+                <input type="reset" value="cancelar" class="btn btn-primary" />
             </div>
         </div>
     </div>

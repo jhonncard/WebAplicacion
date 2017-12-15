@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebAplicacion.Models.Mant_ClientesViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bloqueo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hasta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Retencion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clasificacion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bloqueo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hasta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Retencion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Clasificacion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

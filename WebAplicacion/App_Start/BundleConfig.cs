@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using System.Web.UI.WebControls;
 
 namespace WebAplicacion
 {
@@ -25,7 +26,20 @@ namespace WebAplicacion
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.min.css",
+                     "~/Content/font-awesome.min.css",
+                      "~/Content/font-awesome.css",
+                    //  "~/Content/PagedList.css",
+                    //  "~/Content/css/estilos.css",
+                    //  "~/Content/css/loading-bar.css",
+                    //  "~/Content/css/responsiveslides.css",
+                    //  "~/Content/css/summernote.css",
+                    //  "~/Content/css/tableexport.css",
+                    //  "~/Content/css/treeview.css",
+                    //"~/Content/css/datatables.css" ,
+                    //  "~/Content/css/datatables.min.css",
+                     "~/Content/site.css"
+                      ));
         }
     }
 }

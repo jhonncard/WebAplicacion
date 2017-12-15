@@ -1,5 +1,14 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using Factoring.Negocios;
+using Newtonsoft.Json.Linq;
 using WebAplicacion.Models;
 
 namespace WebAplicacion.Controllers
@@ -13,76 +22,103 @@ namespace WebAplicacion.Controllers
             clienteold = new Mant_ClientesViewModel();
         }
 
-
+           [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: FactoringPyme/Clientes_Man_/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: FactoringPyme/Clientes_Man_/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+        public async Task<ActionResult> Buscarcliente(string id)
+        {        var mcliente = new Mant_ClientesViewModel();
+            var paramid = "0";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                long.Parse(id);
+                paramid = "1";
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                paramid = "0";
             }
-        }
-
-        // GET: FactoringPyme/Clientes_Man_/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: FactoringPyme/Clientes_Man_/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
+            var cliente = new HttpClient();
+            IList<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
             try
             {
-                // TODO: Add update logic here
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+               cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/" + paramid + "?" + id);
+                    JObject desjson = JObject.Parse(json);
+                    IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
+                    foreach (JToken result in results)
+                    {
+                        Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                        searchResults.Add(searchResult);
+                    }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+                 clienteold = searchResults.First();
+                return View("Index",searchResults.First());
+                // return View(mcliente);
         }
 
-        // GET: FactoringPyme/Clientes_Man_/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        public async Task<ActionResult> BuscarDetalle(string rut)
+           {
+               var mcliente = new Mant_ClientesViewModel();
+               
+               var cliente = new HttpClient();
+               IList<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
+               try
+               {
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                   cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteFactoring/" + rut);
+                   JObject desjson = JObject.Parse(json);
+                   IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
+                   foreach (JToken result in results)
+                   {
+                       Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                       searchResults.Add(searchResult);
+                   }
 
-        // POST: FactoringPyme/Clientes_Man_/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+               }
+               catch (Exception ex)
+               {
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                   throw ex;
+               }
+
+               clienteold = searchResults.First();
+               return View("Index", searchResults.First());
+               // return View(mcliente);
+           }
+
+        public async Task<ActionResult> GuardaResult(Mant_ClientesViewModel modelo)
+           {
+               
+               Reflectiones reflex = new Reflectiones();
+               var cliente = new HttpClient();
+            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+               cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+            HttpResponseMessage response = await cliente.PostAsJsonAsync
+                   ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", (modelo));
+
+               //if (response.StatusCode.Equals(200))
+               //    reflex.Comprar(oldmodel, modelo, "user", "condiciones");
+
+               return View("Index",modelo);
+               
+           }
+
+
+      
+       
+     
     }
 }

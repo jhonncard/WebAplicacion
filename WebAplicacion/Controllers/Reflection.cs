@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using WebAplicacion.Models;
 using System.Net.Http;
-using System.Threading; 
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace WebAplicacion.Controllers
 {
@@ -23,8 +25,8 @@ namespace WebAplicacion.Controllers
 
         private List<stObjDif> fieldsValuesDiff(object obj1, object obj2)
         {
-            Type tOb1 = obj1.GetType();
-            Type tOb2 = obj2.GetType();
+            var tOb1 = obj1.GetType();
+            var tOb2 = obj2.GetType();
 
             var listPropOrig = tOb1.GetProperties().Select(p => p).ToList();
             var listPropMod = tOb2.GetProperties().Select(p => p).ToList();
@@ -42,26 +44,36 @@ namespace WebAplicacion.Controllers
         
 
 
-        public  async void Comprar(object obj1, object obj2, string usuario, string relacionada)
-         {
-
-            List<LogersViewModel> logs = new List<LogersViewModel>();
-            List<stObjDif> dif = new List<stObjDif>();
-            dif =fieldsValuesDiff(obj1, obj2);
-
+        public  async Task<bool> Comprar(object obj1, object obj2, string user, string relacionada)
+        {
+            var resp = false;
+            var logs = new List<LogersViewModel>();
+            var dif = fieldsValuesDiff(obj1, obj2);
+            
+             if (dif.Any())
+                  resp = true;
             foreach (var item in dif)
             {
-                LogersViewModel log = new LogersViewModel();
-                log.Usuario = usuario;
-                log.Descripcion = string.Format("Se ha modificado el valor de {3} del Valor {0} al valor {1}", item.ValorObj1, item.ValorObj2, item.Campo);
-                log.fecha = DateTime.Now;
-                log.Relacion = relacionada;
-            
+                if (item.Campo.ToUpper() == "ID") continue;
+                var log = new LogersViewModel
+                {
+                    usuario = user,
+                    descipcion = string.Format("Se ha modificado el campo {2} con Valor {0} al valor {1}",
+                        item.ValorObj1, item.ValorObj2, item.Campo),
+                    relacion = relacionada
+                };
                 var cliente = new HttpClient();
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-                HttpResponseMessage response = await cliente.PostAsJsonAsync ( " http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarLogFactoring", log);
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var response = await cliente.PostAsJsonAsync ( " http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarLogFactoring", log);
+
+              
+
             }
+
+            return resp;
+
+
         }
 
         

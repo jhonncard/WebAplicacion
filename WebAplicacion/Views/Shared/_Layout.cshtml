@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link href="" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,13 +21,26 @@
                 @Html.ActionLink("Factoring Pymes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mantenedores
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
+                                <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                                <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
+                                <li>@Html.ActionLink("Bitacora de cambios", "Index", "Log")</li>
+                            @*<li><a href="#">Liga MX</a></li>
+                            <li><a href="#">Ascenso MX</a></li>
+                            <li><a href="#">Copa MX</a></li>*@
+                        </ul>
+                    </li>
+                    @*<li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
                     <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
                     <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
-                    <li>@Html.ActionLink("Log", "Index", "Log")</li>
-                    
-                  
+                    <li>@Html.ActionLink("Log", "Index", "Log")</li>*@
+
+
                 </ul>
             </div>
         </div>
