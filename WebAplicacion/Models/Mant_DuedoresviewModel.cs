@@ -10,7 +10,7 @@ namespace WebAplicacion.Models
     public class Mant_DuedoresViewModel
     {
         [Key]
-        public int Rut { set;  get; }
+        public string Rut { set;  get; }
 
         [Required]
         public string Cliente { set; get; }
@@ -21,7 +21,7 @@ namespace WebAplicacion.Models
 
         [Required]
         [Display(Name = "Días")]
-        public Nullable<int> Dias { get; set; }
+        public int? Dias { get; set; }
 
         [Required]
         [Display(Name = "Sinacofi")]
@@ -30,35 +30,35 @@ namespace WebAplicacion.Models
 
         [Required]
         [Display(Name = "Maxima_Expo Aprob.")]
-        public Nullable<float> Aprobado  { get; set; }
+        public decimal? Aprobado  { get; set; }
 
         [Required]
         [Display(Name = "Util.")]
-        public Nullable<float> Utilizado { get; set; }
+        public decimal? Utilizado { get; set; }
 
         [Required]
         [Display(Name = "Pagado en ult. 12 Meses")]
-        public Nullable<float> pago12 { get; set; }
+        public decimal? pago12 { get; set; }
 
         [Required]
         [Display(Name = "Pagado en ult. 6 Meses")]
-        public Nullable<float> pago6 { get; set; }
+        public decimal? pago6 { get; set; }
 
         [Required]
         [Display(Name = "Mora en ult. 12 Meses")]
-        public Nullable<float> Mora12 { get; set; }
+        public decimal? Mora12 { get; set; }
 
         [Required]
         [Display(Name = "Mora en ult. 6 Meses")]
-        public Nullable<float> Mora6 { get; set; }
+        public decimal? Mora6 { get; set; }
 
         [Required]
         [Display(Name = "Nro Doc. Pag. 12 Meses")]
-        public Nullable<float> NroDoc12 { get; set; }
+        public decimal? NroDoc12 { get; set; }
 
         [Required]
         [Display(Name = "Nro Doc. Pag. 6 Meses")]
-        public Nullable<float> NroDoc6 { get; set; }
+        public decimal? NroDoc6 { get; set; }
 
 
 

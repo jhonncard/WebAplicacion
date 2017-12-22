@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BacFactoringController.cs" />
     <Compile Include="Controllers\ClasificacionController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CondicionesController.cs" />
@@ -166,6 +167,9 @@
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\OperacionController.cs" />
     <Compile Include="Controllers\Reflection.cs" />
+    <Compile Include="Controllers\Servicios\ConfiguracionFinanciera.cs" />
+    <Compile Include="Controllers\Servicios\DatosFinancieros.cs" />
+    <Compile Include="Controllers\Servicios\TipoOperacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,7 +182,9 @@
     <Compile Include="Models\Mant_DuedoresviewModel.cs" />
     <Compile Include="Models\Mant_MduedoresDto.cs" />
     <Compile Include="Models\MonedaViewModel.cs" />
-    <Compile Include="Models\OperacionViewModel.cs" />
+    <Compile Include="Models\Operaciones\DetalleOperacionesViewModel.cs" />
+    <Compile Include="Models\Operaciones\ListCargaMasivaViewModels.cs" />
+    <Compile Include="Models\Operaciones\OperacionViewModel.cs" />
     <Compile Include="Models\ReporteViewModel.cs" />
     <Compile Include="Models\TipoMonedaViewModel.cs" />
     <Compile Include="Models\TipoViewModel.cs" />
@@ -219,6 +225,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsaplicacion.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -244,11 +251,12 @@
     <Content Include="Views\Condiciones\Edit.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Clasificacion\Index.cshtml" />
-    <Content Include="Views\Clientes\Edit.cshtml" />
+    <Content Include="Views\Operacion\Index.cshtml" />
+    <Content Include="Views\Operacion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Operacion\" />
+    <Folder Include="Views\BacFactoring\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

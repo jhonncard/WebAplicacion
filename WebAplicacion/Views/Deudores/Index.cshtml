@@ -6,161 +6,210 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4 class="titulos">Mantenedor Deudores</h4>
-        <hr />
-
         <div class="row">
-            <h4 class="separador">Deudor</h4>
-            <hr />
-            <div class="form-group">
-                @Html.LabelFor(model => model.Rut, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Rut, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Rut, "", new { @class = "text-danger" })
+            <hr/>
+            <div class="col-lg-12">
+                @*<div class="col-lg-4">*@
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color: #3598D4; color: #ffffff; font-weight: bold;">
+                        Deudores  
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <input type="text" name="nombre" id="nombre" placeholder="Indique nombre ó Rut"
+                                               style="font-size: 12px;" class="form-control buscar" onkeyup="GetDeudorPorNombre();"
+                                               onkeypress="return SoloLetrasYNumeros(event);" />
+                                        <ul class="list-group" id="busquedaCliente" style="display: none; max-height: 200px; overflow: auto;"></ul>
+                                        <span class="help-block">* Rut sin puntos, ni guión, ni dígito verificador</span>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td rowspan="2" valign="top">&nbsp;<img src="~/Content/img/ajax-loader.gif" style="display: none; width: 30px;" id="loaderCliente" align="top" /></td>
+                                    <td>&nbsp;</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="float: right;">
+                                        <button id="btndetalle" type="button" class="btn btn-primary">
+                                            @*<button id="btndetalle" type="button" class="btn btn-primary" onclick="GetdeudorCliente();">*@
+
+                                                Buscar Cliente <i class="fa fa-search"></i>
+                                            </button>
+</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Cliente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Cliente, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cliente, "", new { @class = "text-danger" })
+
+        </div>
+        <h4 class="titulos">Mantenedor Deudores</h4>
+        <hr/>
+
+        <div class="row">
+          <h4 class="separador">Deudor</h4>
+            <hr/>
+            <div class="row">
+                <div class="form-group">
+                    @Html.Label("Cliente", new {@class = "control-label col-md-2"})
+                    <div class="col-md-4">
+                        @Html.Editor("Cliente", new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Cliente, "", new {@class = "text-danger"})
+                  </div>
+                
+
+               @* <div class="form-group">*@
+                    @Html.Label("Rut", new {@class = "control-label col-md-2"})
+                    <div class="col-md-4">
+                        @Html.Editor("Rut", new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Rut, "", new {@class = "text-danger"})
+                    </div>
+                 
+
+                
                 </div>
+            </div>
+            <div class="row">
+                
             </div>
         </div>
         <div class="row">
 
             <h4 class="separador">Administrador de excepciones</h4>
-            <hr />
-         
-               
-                       <div class="form-group ">
-                        @Html.LabelFor(model => model.Bloqueo, htmlAttributes: new { @class = "control-label col-md-3" })
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.Bloqueo, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Bloqueo, "", new { @class = "text-danger" })
-                        </div>
-                       </div>
-
-              
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Sinacofi, htmlAttributes: new { @class = "control-label col-lg-3 " })
-                                     <div class="col-lg-9">
-                                        <div class="radio">
-                                            <label>
-                                                @Html.RadioButtonFor(model => model.Sinacofi, "false", new { @class = "opPanelGrupo" })
-                                                No
-                                            </label>
-                                        </div>
-
-                                        <div class="radio">
-                                            <label>
-                                                @Html.RadioButtonFor(model => model.Sinacofi, "true", new { @class = "opPanelGrupo" })
-                                                Si @*<span style="color: #3598D4; font-style: italic">(seleccióne esta opción para ingresar grupos económicos)</span>*@
-                                            </label>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Sinacofi, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                            
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Dias, htmlAttributes: new { @class = "control-label col-md-3" })
-                                    <div class="col-md-9">
-                                        @Html.EditorFor(model => model.Dias, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Dias, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                            
-               
-                    <div class="row">
-                        
-                    </div>
-
-                    <div class="row form-inline">
-                        
-                    </div>
-                   
-                </div>
+            <hr/>
 
 
-            <div class="row ">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Aprobado, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Aprobado, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Aprobado, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Utilizado, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Utilizado, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Utilizado, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group ">
+                @Html.LabelFor(model => model.Bloqueo, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Bloqueo, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Bloqueo, "", new {@class = "text-danger"})
                 </div>
             </div>
 
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sinacofi, new {@class = "control-label col-lg-3 "})
+                <div class="col-lg-9">
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Sinacofi, "false", new {@class = "opPanelGrupo"})
+                            No
+                        </label>
+                    </div>
+
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Sinacofi, "true", new {@class = "opPanelGrupo"})
+                            Si @*<span style="color: #3598D4; font-style: italic">(seleccióne esta opción para ingresar grupos económicos)</span>*@
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Sinacofi, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Dias, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Dias, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Dias, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
+
             <div class="row">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.pago12, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.pago12, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.pago12, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.pago6, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.pago6, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.pago6, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Mora12, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Mora12, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Mora12, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="row form-inline">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Mora6, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.Mora6, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Mora6, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NroDoc12, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.NroDoc12, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NroDoc12, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+        </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NroDoc6, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
-                        @Html.EditorFor(model => model.NroDoc6, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NroDoc6, "", new { @class = "text-danger" })
-                    </div>
+
+        <div class="row ">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Aprobado, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Aprobado, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Aprobado, "", new {@class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                    <input type="" value="Cancelar" class="btn btn-primary" />
+                @Html.LabelFor(model => model.Utilizado, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Utilizado, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Utilizado, "", new {@class = "text-danger"})
                 </div>
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.pago12, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.pago12, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.pago12, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.pago6, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.pago6, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.pago6, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mora12, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Mora12, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Mora12, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mora6, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Mora6, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Mora6, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NroDoc12, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.NroDoc12, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.NroDoc12, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NroDoc6, new {@class = "control-label col-md-3"})
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.NroDoc6, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.NroDoc6, "", new {@class = "text-danger"})
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary"/>
+                <input type="" value="Cancelar" class="btn btn-primary"/>
+            </div>
+        </div>
+    </div>
 }
 
 @*<div>
@@ -169,4 +218,153 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function GetDeudorPorNombre() {
+            $("#detalleCliente").hide();
+            $("#busquedaCliente").hide();
+            var nombre = $("#nombre").val();
+            nombre = nombre.trim();
+            if (isNaN(nombre)) {
+                if (nombre.length > 3) {
+                    $("#loaderCliente").fadeIn();
+                    var data = {
+                        "nombre": nombre
+                    };
+                    $.ajax({
+                         url:"@Url.Action("GetDeudorPorNombre","Deudores")",
+                        type: "POST",
+                        data: data, //JSON.stringify(data),
+                        // dataType: "json",
+                        contentType: "application/json",
+                        success: function(response) {
+                            $("#busquedaCliente").text("");
+                            if (response.Clientes.length > 0) {
+                                $("#loaderCliente").fadeOut('slow');
+
+                                for (var i = 0; i < response.Clientes.length; i++) {
+                                    var cadena = "";
+                                    cadena +=
+                                        "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
+                                        response.Clientes[i].IdCliente +
+                                        "&quot;, ";
+                                    cadena += "&quot;" +
+                                        response.Clientes[i].Nombre +
+                                        "&quot;, &quot;" +
+                                        response.Clientes[i].IdEjecutivo +
+                                        "&quot;);'>";
+                                    cadena += "<i class='fa fa-user'></i> " + response.Clientes[i].Nombre + "</li>";
+                                    $("#busquedaCliente").append(cadena);
+                                }
+                                $("#busquedaCliente").fadeIn('slow');
+                            } else {
+                                $("#loaderCliente").fadeOut('slow');
+                                var cadena = "";
+                                cadena +=
+                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
+                                $("#busquedaCliente").append(cadena);
+                                $("#busquedaCliente").fadeIn('slow');
+                            }
+                        },
+                        error: function() {
+                            console.log("Error al buscar cliente");
+                        }
+                    });
+                } else {
+                    $("#loaderCliente").hide();
+                    if (nombre.length < 1) {
+                        $("#busquedaCliente").text("");
+                        $("#busquedaCliente").hide();
+                    } else {
+                        $("#busquedaCliente").text("");
+                        var cadena = "";
+                        cadena +=
+                            "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');>* Búsqueda debe ser mayor a 3 caracteres</li>";
+                        $("#busquedaCliente").append(cadena);
+                        $("#busquedaCliente").fadeIn('slow');
+                    }
+                }
+            } else {
+                if (nombre.length > 6) {
+                    $("#loaderCliente").fadeIn();
+                    var data = {
+                        "nombre": nombre
+                    };
+                    $.ajax({
+                        url:"@Url.Action("GetDeudorePorRut","Deudores")",
+                        type: "POST",
+                        data: data, //JSON.stringify(data),
+                        //dataType: "json",
+                        contentType: "application/json",
+                        success: function(response) {
+                            $("#busquedaCliente").text("");
+                            if (response.Clientes.length > 0) {
+                                $("#loaderCliente").fadeOut('slow');
+
+                                for (var i = 0; i < response.Clientes.length; i++) {
+                                    var cadena = "";
+                                    cadena +=
+                                        "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
+                                        response.Clientes[i].IdCliente +
+                                        "&quot;, ";
+                                    cadena += "&quot;" +
+                                        response.Clientes[i].Nombre +
+                                        "&quot;, &quot;" +
+                                        response.Clientes[i].IdEjecutivo +
+                                        "&quot;);'>";
+                                    cadena += "<i class='fa fa-user'></i> " + response.Clientes[i].Nombre + "</li>";
+                                    $("#busquedaCliente").append(cadena);
+                                }
+                                $("#busquedaCliente").fadeIn('slow');
+                            } else {
+                                $("#loaderCliente").fadeOut('slow');
+                                var cadena = "";
+                                cadena +=
+                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
+                                $("#busquedaCliente").append(cadena);
+                                $("#busquedaCliente").fadeIn('slow');
+                            }
+                        },
+                        error: function() {
+                            console.log("Error al buscar cliente");
+                        }
+                    });
+                } else {
+                    $("#loaderCliente").hide();
+                    $("#busquedaCliente").text("");
+                    $("#busquedaCliente").hide();
+                }
+            }
+
+        }
+
+        $(function() {
+            $("#btndetalle").click(function() {
+                var url = "@Url.Action("BuscarDetalle", "Deudores")";
+                var rut = $("#Rut").val();
+                var data = { rut: rut }
+                $.post(url, data).done(data)
+            });
+        });
+
+
+        // -------------------------------------------------------------------------
+        function GetDeudor(idCliente, nombreCliente) {}
+        //$8function
+
+
+        //$("#div_editCliente").hide();
+
+        //$("#nombre").val(nombreCliente);
+        //$("#busquedaCliente").hide();
+
+        //$("#div_editCliente").load(baseUrl + "/clientescarterizados/getclienteporid", {
+        //    idCliente: idCliente,
+        //    viewName: "_editCliente"
+        //});
+
+        //$("#div_editCliente").fadeIn('slow');
+
+    </script>
 }

@@ -79,7 +79,7 @@ namespace WebAplicacion.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 LoggersViewModel searchResult = new LoggersViewModel();
                 searchResults.Add(searchResult);

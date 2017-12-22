@@ -161,7 +161,7 @@
     </div>
 
     <div class="row">
-        <h4 class="center separador">Tasa Spread </h4>
+        <h4 class="center separador">Spread </h4>
         <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.TasaSpreadBolsaProductos, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -187,7 +187,9 @@
                       
                            @Html.LabelFor(model => model.ComisionTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
                        <div class="col-md-4">
-                           @Html.DropDownList("ComisionTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
+                          @* @DropDownList1.SelectedIndex = DropDownList1.Items.IndexOf(DropDownList1.Items.FindByValue(miValor));*@
+                           
+                           @Html.DropDownList("ComisionTipoMoneda",(List<SelectListItem>) ViewBag.comisionTipoMoneda)
                            @*@Html.EditorFor(model => model.ComisionTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })*@
                            @Html.ValidationMessageFor(model => model.ComisionTipoMoneda, "", new {@class = "text-danger"})
                        </div>
@@ -220,7 +222,7 @@
             
                 @Html.LabelFor(model => model.GastosTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.listamonedas)
+                    @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.gastosTipoMoneda)
                     @*@Html.EditorFor(model => model.GastosTipoMoneda, new {htmlAttributes = new {@class = "form-control"}})*@
                     @Html.ValidationMessageFor(model => model.GastosTipoMoneda, "", new {@class = "text-danger"})
                 </div>  

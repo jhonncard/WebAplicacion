@@ -31,7 +31,7 @@ namespace WebAplicacion.Models
 
         [Required(ErrorMessage = "Valor Requerido")]
         [Range(0, 100, ErrorMessage = "Valor fuera de Rango")]
-        public Nullable<float> Retencion { get; set; }
+        public Nullable<decimal> Retencion { get; set; }
 
         [Required(ErrorMessage = "Valor Requerido")]
         [Display(Name = "Clasificcacion")]

@@ -20,21 +20,21 @@ namespace WebAplicacion.Models
 
         public string Clasificacion { get; set; }
 
-        public float? Aprobado { get; set; }
+        public decimal? Aprobado { get; set; }
             
-        public float? Utilizado { get; set; }
+        public decimal? Utilizado { get; set; }
     
-        public float? pago12 { get; set; }
+        public decimal? pago12 { get; set; }
         
-        public float? pago6 { get; set; }
+        public decimal? pago6 { get; set; }
 
-        public float? Mora12 { get; set; }
+        public decimal? Mora12 { get; set; }
 
-        public float? Mora6 { get; set; }
+        public decimal? Mora6 { get; set; }
 
-        public float? NroDoc12 { get; set; }
+        public decimal? NroDoc12 { get; set; }
 
-       public float? NroDoc6 { get; set; }
+       public decimal? NroDoc6 { get; set; }
 
         
     }

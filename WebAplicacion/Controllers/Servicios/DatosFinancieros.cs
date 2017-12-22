@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebAplicacion.Models
+namespace WebAplicacion.Controllers.Servicios
 {
-    public class OperacionViewModel
+    public class DatosFinancieros
     {
     }
 }

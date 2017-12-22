@@ -13,15 +13,7 @@
     color: #ffffff;
 }
 
-.dropdown-menu > li ul > li > a:hover,
-.dropdown-menu > li ul > li > a:focus,
- .dropdown-menu > li ul > li > a,
-.dropdown-menu :active
-{
-    text-decoration: none;
-    background-color: #3598D4;
-    color: #ffffff;
-}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -41,10 +33,26 @@ select,
 textarea {
     max-width: 300px;
 }
- .buscar
-{
+ .buscar{
      max-width: 1200px;
 }
+
+.cm-input-nom {
+    max-width: 900px; 
+}
+
+ .cm-input-numerico {
+     max-width: 100px; 
+ }
+
+.cm-input-text {
+    max-width: 150px; 
+}
+
+.cm-dropdanw {
+    max-width: 150px; 
+}
+
 
 .separador {
      padding-left:69px;
@@ -79,7 +87,7 @@ textarea {
 
 
 
-/*.dropdown-submenu {
+.dropdown-submenu {
     position: relative;
 }
 
@@ -157,16 +165,10 @@ textarea {
     height: 31px;
 }
 
-.separador {
-    padding-left:69px;
-    padding-right: 15px;
-    color:darkred;
-    background-color:lightgray;
-}
 
 
 .titulos {
-    padding-left:55px;*/
+    padding-left:55px;}
 
 /*!
  *  Font Awesome 4.1.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3032,27 +3034,20 @@ table.tclean {
 .modal-body .tclean {
     word-break: break-all;
 } 
-.navbar-inverse, 
+/*.navbar-inverse, 
 .dropdown-toggle, .dropdown-menu,
 .caret, .navbar-collapse, .collapse
 ,.nav ,.navbar-nav
 {
     background-color: #3598D4;
     color: #ffffff;
-}
-
-/*.dropdown-menu > li  > a:hover,
-.dropdown-menu > li  > a:focus {
-    text-decoration: none;
-    background-color: #3598D4;
-    color: #ffffff;
 }*/
 
-.dropdown-menu > li ul > li > a:hover,
-.dropdown-menu > li ul > li > a:focus 
-.dropdown-menu > li ul > li > a:link
-{
-    text-decoration: none;
-    background-color: #3598D4;
-    color: #ffffff;
+
+
+
+.seccion {
+    width: 100%;
+    padding-top: 2px;
+    border: 1px solid #999;
 }

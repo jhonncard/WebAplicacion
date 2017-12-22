@@ -14,31 +14,37 @@ namespace WebAplicacion.Controllers
 {
     public class DeudoresController : Controller
     {
+        private Mant_DuedoresViewModel DeudorOld = new Mant_DuedoresViewModel();
+
+        private readonly HttpClient _cliente = new HttpClient();
+
+
         public ActionResult Index()
         {
-            return View();
+           return  RedirectToAction("BuscarDetalle", "Deudores");
+           // return View();
         }
 
         public async Task<ActionResult> Buscardeudor(string id)
         {
-           
+
             var paramid = "0";
             try
             {
                 long.Parse(id);
                 paramid = "1";
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 paramid = "0";
             }
-            var cliente = new HttpClient();
+         
             IList<Mant_DuedoresViewModel> searchResults = new List<Mant_DuedoresViewModel>();
             try
             {
-              cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudores/" + paramid + "?" + id);
+              _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudores/" + paramid + "?param=" + id);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
                 foreach (var result in results)
@@ -64,15 +70,15 @@ namespace WebAplicacion.Controllers
         {
             var mcliente = new Mant_DuedoresViewModel();
 
-            var cliente = new HttpClient();
+           
             IList<Mant_DuedoresViewModel> searchResults = new List<Mant_DuedoresViewModel>();
             try
             {
-                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudoresFactoring/" + rut);
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudoresFactoring/" + "0797312207");
                 var desjson = JObject.Parse(json);
-                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
+                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoDeudoresFactoring"].Children().ToList();
                 foreach (var result in results)
                 {
                     Mant_DuedoresViewModel searchResult = result.ToObject<Mant_DuedoresViewModel>();
@@ -80,10 +86,12 @@ namespace WebAplicacion.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
-                throw ex;
+                ViewBag.Mensaje = "Cliente No encontrado";
+                Mant_DuedoresViewModel searchResult = new  Mant_DuedoresViewModel();
+                searchResults.Add(searchResult);
             }
 
             
@@ -94,16 +102,17 @@ namespace WebAplicacion.Controllers
 
         public async Task<ActionResult> GuardaResult(Mant_DuedoresViewModel modelo)
         {
-
             Reflectiones reflex = new Reflectiones();
-            var cliente = new HttpClient();
-            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-            var response = await cliente.PostAsJsonAsync
+            
+            
+            if (!await reflex.Comprar((Buscardatos(modelo.Rut.ToString())), modelo, "user", "Deudores")) return View("Index", modelo);
+            _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+            var response = await _cliente.PostAsJsonAsync
                 ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarDeudoresFactoring/", (MapperMantMduedoresDto(modelo)));
 
-           if (response.StatusCode.Equals(200))
-              reflex.Comprar((Buscardatos(modelo.Rut.ToString())), modelo, "user", "Deudores");
+           //if (response.StatusCode.Equals(200))
+           //   reflex.Comprar((Buscardatos(modelo.Rut.ToString())), modelo, "user", "Deudores");
 
             return View("Index", modelo);
 
@@ -140,7 +149,7 @@ namespace WebAplicacion.Controllers
 
         private static async Task<IList<Mant_DuedoresViewModel>> Buscardatos(string rut)
         {
-            var cliente = new HttpClient();
+             HttpClient cliente = new HttpClient();
             IList<Mant_DuedoresViewModel> searchResults = new List<Mant_DuedoresViewModel>();
             try
             {
@@ -156,12 +165,76 @@ namespace WebAplicacion.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 var searchResult = new Mant_DuedoresViewModel();
                 searchResults.Add(searchResult);
             }
             return searchResults;
+        }
+
+
+
+        public async Task<JsonResult> GetDeudorPorNombre(string nombre)
+        {
+            IList<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
+            try
+            {
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/0?param=" + nombre);
+                JObject desjson = JObject.Parse(json);
+                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
+                foreach (JToken result in results)
+                {
+                    Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                    searchResults.Add(searchResult);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                var searchResult = new Mant_ClientesViewModel();
+                searchResults.Add(searchResult);
+            }
+            return Json(new
+            {
+                Success = true,
+                Clientes = searchResults
+            },
+                JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetDeudorePorRut(string nombre)
+        {
+            var rut = nombre;
+            IList<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
+            try
+            {
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/1?param=" + rut);
+                JObject desjson = JObject.Parse(json);
+                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
+                foreach (JToken result in results)
+                {
+                    Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                    searchResults.Add(searchResult);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                var searchResult = new Mant_ClientesViewModel();
+                searchResults.Add(searchResult);
+            }
+            return Json(new
+            {
+                Success = true,
+                Clientes = searchResults
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 

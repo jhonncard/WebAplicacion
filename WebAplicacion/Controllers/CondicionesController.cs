@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
-
+using System.Runtime.Remoting.Messaging;
+using Factoring.Negocios;
 
 namespace WebAplicacion.Controllers
 {
@@ -20,47 +21,27 @@ namespace WebAplicacion.Controllers
         // GET: FactoringPyme/Condiciones
         public async Task<ActionResult> Index()
         {
-           #region  lista para el dropdown list de monedas 
-            var monedas = new List<MonedaViewModel>();
+            #region  lista para el dropdown list de monedas 
 
-            var valores = ConfigurationManager.AppSettings["Monedas"];
-            var separador = new char[] { ',' };
-            var words = valores.Split(separador, StringSplitOptions.RemoveEmptyEntries);
-            foreach(var valor in words)
-            { 
-              try {
-                        cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                        cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                        var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarMoneda/" + valor );
-                        var desjson = JObject.Parse(json);
-                        IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultarMoneda"].Children().ToList();
-                        monedas.AddRange(results.Select(result => result.ToObject<MonedaViewModel>()));
-                  }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-              }
+            var _monedas = new List<MonedaViewModel>();
+
+            _monedas =await BuscarMonedas();
 
             var i = 1;
-            var listamonedas = monedas.Select(item => new SelectListItem
-                {
-                    Text = item.Simbolo.Trim(),
-                    Value = i++.ToString()
-                })
-                .ToList();
-            ViewBag.listamonedas = listamonedas;
-            
+            var j = 1;
+
+
             #endregion
 
-
+            var resultado = new CondicionesFactoringViewModel();
+           
             IList <CondicionesFactoringViewModel> searchResults = new List<CondicionesFactoringViewModel>();
 
             try
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales");
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
                 foreach (JToken result in results)
@@ -74,28 +55,52 @@ namespace WebAplicacion.Controllers
 
                 throw ex;
             }
-            
-            return View(searchResults.First());
+            resultado = searchResults.First();
+          
+                 
+           var comisionTipoMoneda = _monedas.Select(item => new SelectListItem
+                {
+                    Text = item.Simbolo.Trim(),
+                    Value = i++.ToString(),
+                    Selected = ( i == int.Parse(resultado.ComisionTipoMoneda))
+           }).ToList();
+
+           var gastosTipoMoneda = _monedas.Select(item => new SelectListItem
+                {
+                    Text = item.Simbolo.Trim(),
+                    Value = j++.ToString(),
+                    Selected = (j == int.Parse(resultado.GastosTipoMoneda))
+
+           }).ToList();
+
+           
+            ViewBag.gastosTipoMoneda= gastosTipoMoneda;
+            ViewBag.comisionTipoMoneda = comisionTipoMoneda;
+          
+            return View(resultado);
             // return View();
         }
+
 
         [HttpPost]
         public async Task<ActionResult> Index(CondicionesFactoringViewModel modelo)
         {  var reflex = new Reflectiones();
             oldmodel = await buscardatos();
 
-            if (!await reflex.Comprar(oldmodel, modelo, "user", "condiciones")) return View(modelo);
-            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-            var response = await cliente.PostAsJsonAsync ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
+            if (!await reflex.Comprar(oldmodel, modelo, "user", "condiciones"))  return View();
 
+            
+
+            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+            cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+            var response = await cliente.PostAsJsonAsync ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
 
             return RedirectToAction("Index");
         }
 
 
         
-        private CondicionescomercialesJson Mappercondiciones(CondicionesFactoringViewModel model)
+        private static CondicionescomercialesJson Mappercondiciones(CondicionesFactoringViewModel model)
         {
             var condiciones =
                 new CondicionescomercialesJson
@@ -138,7 +143,7 @@ namespace WebAplicacion.Controllers
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales");
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
                 foreach (JToken result in results)
@@ -157,11 +162,36 @@ namespace WebAplicacion.Controllers
        }
 
 
+        private  async Task<List<MonedaViewModel>> BuscarMonedas()
+        {
+  
 
+        var monedas = new List<MonedaViewModel>();
 
+        var valores = ConfigurationManager.AppSettings["Monedas"];
+        var separador = new char[] { ',' };
+        var words = valores.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+            foreach(var valor in words)
+        { 
+            try {
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarMoneda/" + valor);
+                var desjson = JObject.Parse(json);
+                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultarMoneda"].Children().ToList();
+                monedas.AddRange(results.Select(result => result.ToObject<MonedaViewModel>()));
+            }
+            catch (Exception )
+            {
+                var moneda = new MonedaViewModel();
+                monedas.Add(moneda);
+            }
+        }
+            return monedas;
 
-
-
+        }
+    
+        
 
     }
 }

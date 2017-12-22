@@ -1,35 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace WebAplicacion.Controllers
 {
-    public class OperacionController : Controller
+    public class BacFactoringController : Controller
     {
-        // GET: Factoring/Operacion
+        // GET: BacFactoring
         public ActionResult Index()
         {
             return View();
         }
 
-
-
-
-        // GET: Factoring/Operacion/Details/5
-        public ActionResult Details()
+        // GET: BacFactoring/Details/5
+        public ActionResult DetailsOperacion(string rut)
         {
             return View();
         }
 
-        // GET: Factoring/Operacion/Create
-        public ActionResult Create(int? rut)
+        // GET: BacFactoring/Details/5
+        public ActionResult DetailsFacturas(FileStream archivoexcel)
         {
             return View();
         }
 
-        // POST: Factoring/Operacion/Create
+        // GET: BacFactoring/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: BacFactoring/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -45,13 +49,13 @@ namespace WebAplicacion.Controllers
             }
         }
 
-        // GET: Factoring/Operacion/Edit/5
+        // GET: BacFactoring/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Factoring/Operacion/Edit/5
+        // POST: BacFactoring/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -67,13 +71,13 @@ namespace WebAplicacion.Controllers
             }
         }
 
-        // GET: Factoring/Operacion/Delete/5
+        // GET: BacFactoring/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Factoring/Operacion/Delete/5
+        // POST: BacFactoring/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

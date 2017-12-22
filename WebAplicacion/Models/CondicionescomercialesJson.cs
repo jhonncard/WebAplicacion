@@ -7,27 +7,27 @@ namespace WebAplicacion.Models
 {
     public class CondicionescomercialesJson
     {
-        public float factoringPymes { get; set; }
-        public float factoringMedianas { get; set; }
-        public float factoringGrandes { get; set; }
-        public float factoringCoorporativas { get; set; }
-        public float factoringInmobiliarias { get; set; }
-        public float confirmingPymes { get; set; }
-        public float confirmingMedianas { get; set; }
-        public float confirmingGrandes { get; set; }
-        public float confirmingCoorporativas { get; set; }
-        public float confirmingInmobiliarias { get; set; }
-        public float cobranzaDelegadaPymes { get; set; }
-        public float cobranzaDelegadaMedianas { get; set; }
-        public float cobranzaDelegadaGrandes { get; set; }
-        public float cobranzaDelegadaCoorporativas { get; set; }
-        public float cobranzaDelegadaInmobiliarias { get; set; }
-        public float tasaSpreadBolsaProductos { get; set; }
-        public float comisionPyme { get; set; }
-        public float comisionBancaEmpresa { get; set; }
+        public decimal factoringPymes { get; set; }
+        public decimal factoringMedianas { get; set; }
+        public decimal factoringGrandes { get; set; }
+        public decimal factoringCoorporativas { get; set; }
+        public decimal factoringInmobiliarias { get; set; }
+        public decimal confirmingPymes { get; set; }
+        public decimal confirmingMedianas { get; set; }
+        public decimal confirmingGrandes { get; set; }
+        public decimal confirmingCoorporativas { get; set; }
+        public decimal confirmingInmobiliarias { get; set; }
+        public decimal cobranzaDelegadaPymes { get; set; }
+        public decimal cobranzaDelegadaMedianas { get; set; }
+        public decimal cobranzaDelegadaGrandes { get; set; }
+        public decimal cobranzaDelegadaCoorporativas { get; set; }
+        public decimal cobranzaDelegadaInmobiliarias { get; set; }
+        public decimal tasaSpreadBolsaProductos { get; set; }
+        public decimal comisionPyme { get; set; }
+        public decimal comisionBancaEmpresa { get; set; }
         public string  comisionTipoMoneda { get; set; }
-        public float gastosNotariaDeudor { get; set; }
-        public float gastosNotariaNFacturas { get; set; }
+        public decimal gastosNotariaDeudor { get; set; }
+        public decimal gastosNotariaNFacturas { get; set; }
         public string gastosTipoMoneda { get; set; }
  
     }
