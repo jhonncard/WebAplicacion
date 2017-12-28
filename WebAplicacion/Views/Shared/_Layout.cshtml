@@ -20,14 +20,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Factoring Pyme ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav"  style="color:#f0fff0">
-                <li style="color:#f0fff0">@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
+                <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
                 <li>@Html.ActionLink("Clientes", "Index", "Clientes", null , new {Styles= " color:#f0fff0; font-cp" })</li>
                 <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
                 <li>@Html.ActionLink("Bitacora", "Index", "Log")</li>
+                <li>@Html.ActionLink("Operaciones", "Index", "Operacion")</li>
+                 
 
             </ul>
           
@@ -37,37 +39,7 @@
         
         
         
-        
-
-@*@*<div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Factoring Pyme
-                    <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Matnenedores
-                        <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
-                                <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
-                                <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
-                                <li>@Html.ActionLink("Bitacora de cambios", "Index", "Log")</li>
-                               *<li><a href="#">Liga MX</a></li>
-                                <li><a href="#">Ascenso MX</a></li>
-                                <li><a href="#">Copa MX</a></li>
-                           </ul>
-                    </ul>
-            </li>
-            <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
-            <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
-            <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
-            <li>@Html.ActionLink("Log", "Index", "Log")</li>
-
-
-        </ul>
-    </div>
-        </div>
-    </div>*@
+  
     <div class="container body-content">
         @RenderBody()
         <hr />

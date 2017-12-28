@@ -8,6 +8,7 @@ namespace WebAplicacion.Models.Operaciones
     {
         [Key]
         [Required]
+        [Display(Name = "Rut Cliente")]
         public string  RutCliente { get; set; }
 
         [Required]
@@ -20,7 +21,7 @@ namespace WebAplicacion.Models.Operaciones
 
         [Required]
         [Display(Name = "Costo Fondo")]
-        public decimal?  CostoFondo { get; set; }
+        public decimal? Costo_Fondo { get; set; }
 
         [Required]
         [Display(Name = "Tipo de Operación")]
@@ -119,6 +120,5 @@ namespace WebAplicacion.Models.Operaciones
         [Display(Name = "Total Not. x Deudor")]
         public decimal? TotalNotDeudor { get; set; }
 
-        
-    }
+     }
 }

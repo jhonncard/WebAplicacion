@@ -163,29 +163,37 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CondicionesController.cs" />
     <Compile Include="Controllers\DeudoresController.cs" />
+    <Compile Include="Controllers\ExcepcionOperacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\OperacionController.cs" />
     <Compile Include="Controllers\Reflection.cs" />
-    <Compile Include="Controllers\Servicios\ConfiguracionFinanciera.cs" />
-    <Compile Include="Controllers\Servicios\DatosFinancieros.cs" />
+    <Compile Include="Controllers\Servicios\ConfFinanciera.cs" />
+    <Compile Include="Controllers\Servicios\Cliente.cs" />
+    <Compile Include="Controllers\Servicios\DatFinancieros.cs" />
+    <Compile Include="Controllers\Servicios\Deudor.cs" />
+    <Compile Include="Controllers\Servicios\Operacion.cs" />
     <Compile Include="Controllers\Servicios\TipoOperacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ClasificacionViewModel.cs" />
-    <Compile Include="Models\CondicionescomercialesJson.cs" />
+    <Compile Include="Models\Json\ClienteJson.cs" />
+    <Compile Include="Models\Json\CondicionescomercialesJson.cs" />
     <Compile Include="Models\CondicionesFactoringViewModel.cs" />
-    <Compile Include="Models\LogersViewMode.cs" />
-    <Compile Include="Models\LoggersViewModel.cs" />
-    <Compile Include="Models\Mant_ClientesViewModel.cs" />
-    <Compile Include="Models\Mant_DuedoresviewModel.cs" />
-    <Compile Include="Models\Mant_MduedoresDto.cs" />
+    <Compile Include="Models\Bitacoras\LogersViewMode.cs" />
+    <Compile Include="Models\Bitacoras\LoggersViewModel.cs" />
+    <Compile Include="Models\Clientes\Mant_ClientesViewModel.cs" />
+    <Compile Include="Models\Deudores\Mant_DuedoresviewModel.cs" />
+    <Compile Include="Models\Dto\Mant_MduedoresDto.cs" />
+    <Compile Include="Models\Json\Datos.cs" />
+    <Compile Include="Models\Json\datoscofig.cs" />
     <Compile Include="Models\MonedaViewModel.cs" />
     <Compile Include="Models\Operaciones\DetalleOperacionesViewModel.cs" />
     <Compile Include="Models\Operaciones\ListCargaMasivaViewModels.cs" />
+    <Compile Include="Models\Json\OperacionesJson.cs" />
     <Compile Include="Models\Operaciones\OperacionViewModel.cs" />
-    <Compile Include="Models\ReporteViewModel.cs" />
+    <Compile Include="Models\Bitacoras\ReporteViewModel.cs" />
     <Compile Include="Models\TipoMonedaViewModel.cs" />
     <Compile Include="Models\TipoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -217,6 +225,7 @@
     </Content>
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <None Include="Properties\PublishProfiles\jhonny.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -256,7 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Excepciones\" />
     <Folder Include="Views\BacFactoring\" />
+    <Folder Include="Views\ExcepcionOperacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,4 +1,4 @@
-﻿using WebAplicacion.Models;
+﻿    using WebAplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +21,9 @@ namespace WebAplicacion.Controllers
         // GET: Factoring/Log/Details/5
         public async Task<ActionResult> Details(ReporteViewModel repo)
         {
-            List<LoggersViewModel> searchResults = new List<LoggersViewModel>();
+          var searchResults = new List<LoggersViewModel>();
 
-            string buscar = "";
+            var buscar = "";
 
             if (repo.Clientes)
             {

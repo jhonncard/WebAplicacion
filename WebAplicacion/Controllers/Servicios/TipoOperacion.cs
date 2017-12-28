@@ -6,33 +6,49 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
-using WebAplicacion.Models;
+
 
 
 namespace WebAplicacion.Controllers.Servicios
 {
-    public class TipoOperacion
+    public  class TipoOperacion
     {
        private readonly HttpClient _cliente = new HttpClient();
 
-        //public async Task<List<SelectListItem> Tipo_Operacion()
-        //{
+        public List<SelectListItem> Tipo_Operacion()
+        {
 
-        //    return await llamarServicios(1);
-        //}
+            return  LlamarServicios(1).Result;
+        }
 
+        public Task<List<SelectListItem>> Cobranza()
+        {
 
+            return  LlamarServicios(2);
+        }
 
+        public Task<List<SelectListItem>> Responsabilidad()
+        {
 
-        private async Task<List<SelectListItem>> llamarServicios(int tipo)
+            return  LlamarServicios(3);
+        }
+
+        public Task<List<SelectListItem>> Seguro()
+        {
+
+            return  LlamarServicios(4);
+        }
+
+        private async  Task<List<SelectListItem>> LlamarServicios(int tipo)
         {
             var searchResults = new List<SelectListItem>();
             try
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-AuthorizationOPE"]);
-                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ConsultarDatosOperacion/" + tipo);
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "SaFbnm9FjPwmoJnFxM1q1O3thkclzIUmT4TLycceFZcQ9ama");
+                var json =await  _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ConsultarDatosOperacion/" + tipo);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoDatosOperacion"].Children().ToList();
                 foreach (var result in results)
@@ -45,7 +61,8 @@ namespace WebAplicacion.Controllers.Servicios
             catch (Exception ex)
             {
 
-                throw ex;
+                var searchResult = new SelectListItem();
+                searchResults.Add(searchResult);
             }
             return searchResults;
         }
