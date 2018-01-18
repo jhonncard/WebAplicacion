@@ -6,6 +6,7 @@ using WebAplicacion.Models;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using WebAplicacion.Models.Bitacoras;
 
 namespace WebAplicacion.Controllers
 {

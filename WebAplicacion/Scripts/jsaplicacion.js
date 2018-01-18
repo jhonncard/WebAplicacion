@@ -82,25 +82,25 @@ function countdown() {
     
 		
          
-            //ESCONDE LOADING CUANDO TERMINA DE CARGAR PAGINA HTML
-            $(window).load(function () {
-                $('#cargando').fadeOut();
-        });
+        //    //ESCONDE LOADING CUANDO TERMINA DE CARGAR PAGINA HTML
+        //    $(window).load(function () {
+        //        $('#cargando').fadeOut();
+        //});
 
-            //MUESTRA LOADING CUANDO EJECUTA EVENTO AJAX
-            $(document).ajaxStart(function () {
-                $('#cargando').fadeIn();
-        });
+        //    //MUESTRA LOADING CUANDO EJECUTA EVENTO AJAX
+        //    $(document).ajaxStart(function () {
+        //        $('#cargando').fadeIn();
+        //});
 
-            //ESCONDE LOADING CUANDO TERMINA EVENTO AJAX
-            $(document).ajaxSuccess(function () {
-                $('#cargando').fadeOut();
-        });
+        //    //ESCONDE LOADING CUANDO TERMINA EVENTO AJAX
+        //    $(document).ajaxSuccess(function () {
+        //        $('#cargando').fadeOut();
+        //});
 
-            //ESCONDE LOADING CUANDO OCURRE ERROR EN EVENTO AJAX
-            $(document).ajaxError(function () {
-                $('#cargando').fadeOut();
-        });
+        //    //ESCONDE LOADING CUANDO OCURRE ERROR EN EVENTO AJAX
+        //    $(document).ajaxError(function () {
+        //        $('#cargando').fadeOut();
+        //});
 
 
         

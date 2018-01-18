@@ -23,7 +23,9 @@ namespace WebAplicacion
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                     "~/Scripts/jsaplicacion.js"));
+                      "~/Scripts/jsaplicacion.js",
+                       "~/Scripts/jquery-ui-1.12.1.js"
+                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -39,7 +41,9 @@ namespace WebAplicacion
                     //  "~/Content/css/treeview.css",
                     //"~/Content/css/datatables.css" ,
                     //  "~/Content/css/datatables.min.css",
+                     "~/Content/themes/base/all.css",
                      "~/Content/site.css"
+                    
                       ));
         }
     }

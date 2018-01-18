@@ -1,4 +1,5 @@
-﻿@using System.Web.ModelBinding
+﻿
+@using System.Web.ModelBinding
 @model IEnumerable<WebAplicacion.Models.Operaciones.DetalleOperacionesViewModel>
 
 @*<p>
@@ -6,6 +7,9 @@
 </p>*@
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RutDeudor)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.NroDocumento)
         </th>
@@ -34,43 +38,79 @@
     </tr>
     @if (Model != null)
     {
-        if(Model.Any())
+        if (Model.Any())
         {
-            foreach(var item in Model)
+            foreach (var item in Model)
             {
-            <tr >
-                <td >
-                @Html.DisplayFor(modelItem => item.NroDocumento)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.Monto)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.FechaEmision)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.FechaVencimeinto)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.Pais)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.Ciudad)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.Nombre)
-                </td >
-                <td >
-                @Html.DisplayFor(modelItem => item.Direccion)
-                </td >
-                <td >
-                @Html.ActionLink("Edit", "Edit", new {id = item.RutDeudor}) |
-                @Html.ActionLink("Details", "Details", new {id = item.RutDeudor}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.RutDeudor})
-                </td >
+                <tr>
+                   <td   @Html.DisplayFor(modelItem => item.RutDeudorClass)>
+ 
+                        @Html.DisplayFor(modelItem => item.RutDeudor)
+                    </td>
+                    <td >
+                        @Html.DisplayFor(modelItem => item.NroDocumento)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Monto)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.FechaEmision)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.FechaVencimeinto)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Pais)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Plaza)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td >
+
                 </tr>
             }
         }
     }
+    else{
+        for (int i = 1; i <= 5; i++)
+        {
+            <tr class="table-bordered" >
+                <td >
+                     "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >
+                    "&nbsp;"
+                </td >
+                <td >  "&nbsp;" 
+                </td >
+                
+            </tr>
+        }
+
+    }
 
     </table>
+

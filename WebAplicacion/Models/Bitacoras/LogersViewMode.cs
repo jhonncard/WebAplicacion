@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace WebAplicacion.Models
+namespace WebAplicacion.Models.Bitacoras
 {
     public class LogersViewModel
     {

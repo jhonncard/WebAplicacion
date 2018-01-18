@@ -9,10 +9,9 @@ namespace WebAplicacion.Models.Json
     public class ClienteJson
     {
        
-     
-        public string rut { get; set; }
+     public string rut { get; set; }
 
-       
+     
         public string cliente { get; set; }
 
         

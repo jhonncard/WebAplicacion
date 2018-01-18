@@ -1,61 +1,62 @@
 ﻿@model WebAplicacion.Models.Operaciones.ListCargaMasivaViewModels
 
 
-@{
-//ViewBag.tipooeracion = ope.Tipooeracion();
-//ViewBag.responsabilidad = ope.Responsabilidad();
-//ViewBag.cobranza = ope.Cobranza();
-//ViewBag.seguro = ope.Seguro();
-
-//ViewBag.fechaoperacion = ope.Fechaoperacion();
-//ViewBag.codigomoneda = ope.Codigomoneda();
-//ViewBag.tiopodoc = ope.Tiopodoc();
-//ViewBag.listasino = ope.LIstaSiNo();
-}
 
 
 
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index","Operacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal ">
-    <h4>Operación de Carga Masiva</h4>
+    <h4>Operación de Carga Masiva </h4>
     <hr />
-    <div class="form-group">
-             @Html.ActionLink(" Limpiar", "Edit", null, new { @class = "btn btn-primary fa fa-floppy-o " })
-             @Html.ActionLink(" Buscara", "Details", null, new { @class = "btn btn-success fa fa-search" })
-              <input type="submit" value="Guardar" class="btn btn-primary fa fa-floppy-o" />
-      
+    <div class="row">
+    <div class="col-md-9">
+        <div class="form-group">
+            <input type="reset" value="Limpiar" class="btn btn-primary btn btn-primary"/>
+            @*@Html.ActionLink(" Limpiar", "Edit", null, new {@class = "btn btn-primary fa fa-floppy-o "})*@
+            @*@Html.ActionLink(" Buscara", "Details", null, new {@class = "btn btn-success fa fa-search"})*@
+            @*<input type="submit" value="Guardar" class="btn btn-primary fa fa-floppy-o"/>*@
+        </div>
+        </div>
+    <div class="right-align col-md-3">
+        <div class="form-group">
+            @Html.ActionLink(" Guardar Temporal", null, null, new {@class = "btn btn-primary fa fa-floppy-o "})
+            @Html.ActionLink("Recuperar", null, null, new {@class = "btn btn-success fa fa-search"})
+            @*<input type="submit" value="Guardar" class="btn btn-primary fa fa-floppy-o"/>*@
+        </div>
     </div>
-    <hr />
 
+     
+
+    </div>
+        <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Opercion.RutCliente)
 
     <div class="row ">
         <div class="row" style="padding-top:4px">
             <div class="form-group "  >
-                @Html.LabelFor(model => model.Opercion.RutCliente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.RutCliente, new { htmlAttributes = new { @class = "form-control", onkeydown = "Getcliente(event);" } })
+                @Html.LabelFor(model => model.Opercion.RutCliente,  new { @class = "control-label col-md-2" })
+                <div class="col-md-2 ">
+                    @Html.EditorFor(model => model.Opercion.RutCliente, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Opercion.RutCliente, "", new { @class = "text-danger" })
                 </div>
 
-                @Html.LabelFor(model => model.Opercion.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-6 ">
-                    @Html.EditorFor(model => model.Opercion.Nombre, new { htmlAttributes = new { @class = "form-control cm-input-nom" } })
+                    @Html.LabelFor(model => model.Opercion.Nombre,  new { @class = "control-label col-md-2" })
+                   <div class="col-md-6 ">
+                    @Html.EditorFor(model => model.Opercion.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Opercion.Nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                @Html.LabelFor(model => model.Opercion.CategoríaEempresa, htmlAttributes: new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Opercion.CategoríaEempresa,  new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Opercion.CategoríaEempresa, (List<SelectListItem>)ViewBag.empresas)
+                    @Html.DropDownListFor(model => model.Opercion.CategoríaEempresa, ViewBag.empresas as IEnumerable<SelectListItem>)
                     @*@Html.EditorFor(model => model.Opercion.CategoríaEempresa, new {htmlAttributes = new {@class = "form-control"}})*@
                     @Html.ValidationMessageFor(model => model.Opercion.CategoríaEempresa, "", new {@class = "text-danger"})
                 </div>
@@ -115,11 +116,11 @@
     <div class="row ">
         <div class="row">
             <div class="form-group">
-                @Html.LabelFor(model => model.Opercion.FechaOperacion, htmlAttributes: new {@class = "control-label col-md-2"})
+                @*@Html.LabelFor(model => model.Opercion.FechaOperacion, new {@class = "control-label col-md-2"})
                 <div class="col-md-2">
                     @Html.EditorFor(model => model.Opercion.FechaOperacion, new {htmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.Opercion.FechaOperacion, "", new {@class = "text-danger"})
-                </div>
+                </div>*@
           
                 @Html.LabelFor(model => model.Opercion.CodigoMoneda, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-2">
@@ -234,9 +235,7 @@
           
     </div>
    
-    <hr />
-        @Html.ActionLink(" Descargar", "Edit", null, new { @class = "btn btn-primary fa fa-file-excel-o" })
-        @Html.ActionLink(" Cargar", "Details", null, new { @class = "btn btn-success fa fa-file-excel-o" })
+  
     <div class="row " style="height: 250px; overflow: auto">
         @Html.Partial("details",Model.Doperaciones)
     </div>
@@ -248,8 +247,9 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Opercion.TotalDoc, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
-                        @Html.EditorFor(model => model.Opercion.TotalDoc, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Opercion.TotalDoc, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Opercion.TotalDoc, new { disabled = "disabled" , @class = "form-control" })
+                        @*@Html.DisplayFor(model => model.Opercion.TotalDoc, new {htmlAttributes = new {@class = "form-control"}})*@
+                        @Html.ValidationMessageFor(model => model.Opercion.TotalDoc, "", new {@class = "text-danger"})
                     </div>
                     <div class="col-md-4">
                         &nbsp;
@@ -257,8 +257,9 @@
                     </div>
                     @Html.LabelFor(model => model.Opercion.TotalNotDcto, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
-                        @Html.EditorFor(model => model.Opercion.TotalNotDcto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Opercion.TotalNotDcto, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Opercion.TotalNotDcto, new { disabled = "disabled" , @class = "form-control" })
+                        @*@Html.DisplayFor(model => model.Opercion.TotalNotDcto, new {htmlAttributes = new {@class = "form-control"}})*@
+                        @Html.ValidationMessageFor(model => model.Opercion.TotalNotDcto, "", new {@class = "text-danger"})
                     </div>
                    
                 </div>
@@ -270,20 +271,24 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Opercion.TotalAcum, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
-                        @Html.EditorFor(model => model.Opercion.TotalAcum, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Opercion.TotalAcum, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Opercion.TotalAcum, new { disabled = "disabled" , @class = "form-control" })
+                        @*@Html.DisplayFor(model => model.Opercion.TotalAcum, new {htmlAttributes = new {@class = "form-control"}})*@
+                        @Html.ValidationMessageFor(model => model.Opercion.TotalAcum, "", new {@class = "text-danger"})
                     </div>
                    
                     @Html.LabelFor(model => model.Opercion.Ndeudores, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
-                        @Html.EditorFor(model => model.Opercion.Ndeudores, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Opercion.Ndeudores, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Opercion.Ndeudores, new { disabled = "disabled" , @class = "form-control" })
+                        @*@Html.DisplayFor(model => model.Opercion.Ndeudores, new {htmlAttributes = new {@class = "form-control"}})*@
+                        @Html.ValidationMessageFor(model => model.Opercion.Ndeudores, "", new {@class = "text-danger"})
                     </div>
                    
                     @Html.LabelFor(model => model.Opercion.TotalNotDeudor, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-2">
-                        @Html.EditorFor(model => model.Opercion.TotalNotDeudor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Opercion.TotalNotDeudor, "", new { @class = "text-danger" })
+                        
+                        @Html.TextBoxFor(model => model.Opercion.TotalNotDeudor, new { disabled = "disabled" , @class = "form-control" })
+                        @*@Html.DisplayFor(model => model.Opercion.TotalNotDeudor, new {htmlAttributes = new {@class = "form-control"}})*@
+                        @Html.ValidationMessageFor(model => model.Opercion.TotalNotDeudor, "", new {@class = "text-danger"})
                     </div>
                 </div>
             </div>
@@ -299,14 +304,46 @@
     </div>
 
 
+<hr />
+
+@*@using (Html.BeginForm("Cargar", "Operacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { *@  
+    <div class="row">
+        <div class="col-md-1">
+            @Html.ActionLink(" Descargar", "Descargar", null, new { @class = "btn btn-primary fa fa-file-excel-o" })
+          </div>
+        <div class="col-md-1">
+            <input type="submit" value="Cargar" name="boton" class="btn btn-success fa fa-floppy-o" />
+        </div>
+        <div class="col-md-2">
+            <input type="file" name="archivo"/>
+        </div>
+    </div>
+
 }
 
-
+@*@Html.ActionLink(" Cargar", "Details", null, new { @class = "btn btn-success fa fa-file-excel-o" })
+<hr />*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 
     <script type="text/javascript">
+        $(document).ready(
+            function() {
+                $("#Opercion_Nombre").autocomplete({
+                    source: "/Clientes/GetClientesPorNombre",
+                    minLength: 3
+                });
+
+                $("#Opercion_RutCliente").autocomplete({
+                    source: "/Clientes/GetClientesPorRut",
+                    minLength: 6
+                });
+
+            });
+
 
         function clear() {
             $.ajax({
@@ -320,42 +357,73 @@
             });
         }
 
-        function Getcliente(event) {
-            var key = event.which || event.keyCode;
-            if (key != 13)
-                var rut = $("#RutCliente").val();
-            $.ajax({
-                url: "@Url.Action("index", "Operacion")",
-                type: "POST",
-                data: JSON.stringify(rut),
-                dataType: "json",
-                contentType: "application/json",
-                success: function(response) {
 
-                }
-            });
-        }
+        $("#Opercion_Nombre").keypress(function(event) {
+            if (event.which == 13) {
+                var nombre = $("#Opercion_Nombre").val();
+                var daton = { "nombre": nombre };
 
-        $(document).ready(function() {
-            $("").click(function() {
-                $(this).hide();
-            });
-        });
-
-        $("#rutcliente").keypress(function(e) {
-            if (e.which == 13) {
-                var rut = $("#RutCliente").val();
                 $.ajax({
-                    url: "@Url.Action("index", "Operacion")",
+                    url: "/Clientes/GetClientePorNombre",
                     type: "POST",
-                    data: JSON.stringify(rut),
+                    data: JSON.stringify(daton),
                     dataType: "json",
-                    contentType: "application/json"
+                    contentType: "application/json",
+                    success: function (response) {
+                   
+                       
+                        //if (response.Clientes.length > 0) {
+                            //$("#loaderCliente").fadeOut('slow');
+                        //$("#Opercion_RutCliente").attr("value", response);
+               
+                      //  alert(document.getElementById("Opercion_RutCliente").name);
+                      //  document.getElementById("Opercion_RutCliente").value = "1234567890";
+                        $("#Opercion_RutCliente").val(response);
+                       // alert(response);
+                        //$("#loaderCliente").hide();
+                        //}
+                    }
                 });
-            }
-       });
-    
+           
+        @*@Url.Action("GetClientePorNombre", "Clientes")",*@
+     //   console.log(nombre);
+        @*var nombre = $("#Opercion_RutCliente").val();
+                var daton = { "nombre": nombre };
+                var nombre = $("#valor").val();
+                var daton = { "nombre": nombre };
+                var nombre = $("#Opercion_RutCliente").val();
+                var daton = { "nombre": nombre };
 
+                $.ajax({
+                    url: "@Url.Action("GetClientePorNombre", "Clientes")",
+                    type: "POST",
+                    data: JSON.stringify(daton),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.Clientes.length > 0) {
+                            $("#loaderCliente").fadeOut('slow');
+
+                            for (var i = 0; i < response.Clientes.length; i++) {
+                                var cadena = "";
+                                cadena +=
+                                    "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
+                                    response.Clientes[i].Rut +
+                                    "&quot;, ";
+                                cadena += "&quot;" + response.Clientes[i].Cliente + "&quot;'>";
+                                cadena += "<i class='fa fa-user'></i> " + response.Clientes[i].Cliente + "</li>";
+                                $("#busquedaCliente").append(cadena);
+
+                                $("#loaderCliente").hide();
+                            }
+                        }
+                    }
+                });*@
+
+
+
+    }
+    });
     </script>
 
 }

@@ -1,0 +1,113 @@
+﻿
+@model IEnumerable<WebAplicacion.Models.Operaciones.DetalleOperacionesViewModel>
+
+@{
+    ViewBag.titulo=" SUBIR ARCHIVO";
+}
+
+<h4>@ViewBag.Titulo</h4>
+<hr/>
+@{
+    if (!(string.IsNullOrEmpty(ViewBag.archivo))) {
+    <h4>ViewBag.archivo</h4>
+    <hr/> 
+    }
+}
+
+
+
+@using (Html.BeginForm( "Update","Pruebas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-1">
+            @Html.ActionLink(" Descargar", "Descargar", null, new { @class = "btn btn-primary fa fa-file-excel-o" })
+        </div>
+        <div class="col-md-1">
+            <input type="submit" value="Cargar" name="boton" class = "btn btn-primary " />
+        </div>
+        <div class="col-md-2">
+            <input type="file" name="archivo"/>
+        </div>
+
+       
+        
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NroDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimeinto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ciudad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model!=null )
+    {
+        if(Model.Any())
+        {
+            foreach(var item in Model)
+            {
+                <tr >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.NroDocumento)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Monto)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.FechaEmision)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.FechaVencimeinto)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Pais)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Plaza)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td >
+                    <td >
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td >
+                    <td >
+                       
+                    </td >
+                </tr>
+            }
+        }
+    }
+</table>

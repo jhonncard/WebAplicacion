@@ -1,4 +1,4 @@
-﻿@model WebAplicacion.Models.Mant_DuedoresViewModel
+﻿@model WebAplicacion.Models.MantDuedoresViewModel
 
 
 @using (Html.BeginForm())
@@ -218,8 +218,25 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
 
     <script type="text/javascript">
+
+        $(document).ready(function() {
+            var nombres = [
+                "perdo",
+                "juan",
+                "luis",
+                "pedro"
+            ];
+            $("#Cliente").autocomplete({
+                source:nombres
+        });
+
+
+    });
+
 
         function GetDeudorPorNombre() {
             $("#detalleCliente").hide();
@@ -233,7 +250,7 @@
                         "nombre": nombre
                     };
                     $.ajax({
-                         url:"@Url.Action("GetDeudorPorNombre","Deudores")",
+                        url: "@Url.Action("GetDeudorPorNombre", "Deudores")",
                         type: "POST",
                         data: data, //JSON.stringify(data),
                         // dataType: "json",
@@ -292,7 +309,7 @@
                         "nombre": nombre
                     };
                     $.ajax({
-                        url:"@Url.Action("GetDeudorePorRut","Deudores")",
+                        url: "@Url.Action("GetDeudorePorRut", "Deudores")",
                         type: "POST",
                         data: data, //JSON.stringify(data),
                         //dataType: "json",

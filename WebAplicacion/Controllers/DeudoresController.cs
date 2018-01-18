@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 
 using WebAplicacion.Controllers.Servicios;
+using WebAplicacion.Models.Deudores;
 
 
 namespace WebAplicacion.Controllers
 {
     public class DeudoresController : Controller
     {
-        private Mant_DuedoresViewModel DeudorOld = new Mant_DuedoresViewModel();
+        private MantDuedoresViewModel DeudorOld = new MantDuedoresViewModel();
 
         private readonly HttpClient _cliente = new HttpClient();
 
@@ -55,7 +56,7 @@ namespace WebAplicacion.Controllers
          }
 
 
-        public async Task<ActionResult> GuardaResult(Mant_DuedoresViewModel modelo)
+        public async Task<ActionResult> GuardaResult(MantDuedoresViewModel modelo)
         {
             var buscardatos = new Deudor();
           await  buscardatos.GuardarDeudor(modelo);

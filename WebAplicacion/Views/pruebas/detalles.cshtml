@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebAplicacion.Models.Operaciones.DetalleOperacionesViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NroDocumento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVencimeinto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plaza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NroDocumento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEmision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaVencimeinto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Plaza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RutDeudor }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RutDeudor }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RutDeudor })
+        </td>
+    </tr>
+}
+
+</table>

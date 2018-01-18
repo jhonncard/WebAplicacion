@@ -161,7 +161,7 @@
     </div>
 
     <div class="row">
-        <h4 class="center separador">Spread </h4>
+        <h4 class="center separador">Tasa Spread </h4>
         <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.TasaSpreadBolsaProductos, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -189,8 +189,7 @@
                        <div class="col-md-4">
                           @* @DropDownList1.SelectedIndex = DropDownList1.Items.IndexOf(DropDownList1.Items.FindByValue(miValor));*@
                            
-                           @Html.DropDownList("ComisionTipoMoneda",(List<SelectListItem>) ViewBag.comisionTipoMoneda)
-                           @*@Html.EditorFor(model => model.ComisionTipoMoneda, new { htmlAttributes = new { @class = "form-control" } })*@
+                           @Html.DropDownListFor(model => model.ComisionTipoMoneda,(List<SelectListItem>) ViewBag.comisionTipoMoneda)
                            @Html.ValidationMessageFor(model => model.ComisionTipoMoneda, "", new {@class = "text-danger"})
                        </div>
                        </div>
@@ -222,8 +221,8 @@
             
                 @Html.LabelFor(model => model.GastosTipoMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.DropDownList("GastosTipoMoneda", (List<SelectListItem>)ViewBag.gastosTipoMoneda)
-                    @*@Html.EditorFor(model => model.GastosTipoMoneda, new {htmlAttributes = new {@class = "form-control"}})*@
+                    @* @DropDownList1.SelectedIndex = DropDownList1.Items.IndexOf(DropDownList1.Items.FindByValue(mdel.GastosTipoMoneda));*@
+                    @Html.DropDownListFor(model => model.GastosTipoMoneda, (List<SelectListItem>) ViewBag.gastosTipoMoneda)
                     @Html.ValidationMessageFor(model => model.GastosTipoMoneda, "", new {@class = "text-danger"})
                 </div>  
         </div>
@@ -251,10 +250,10 @@
     
 
 
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    
+
 }
+

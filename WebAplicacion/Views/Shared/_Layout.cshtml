@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    <link href="" rel="stylesheet" />
+    <title>@ViewBag.Title Factoring Pyme</title>
+ 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+    <link href="~/Content/themes/base/all.css" rel="stylesheet" />    
 </head>
 <body>
     
@@ -25,7 +25,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav"  style="color:#f0fff0">
                 <li>@Html.ActionLink("Condiciones", "Index", "Condiciones")</li>
-                <li>@Html.ActionLink("Clientes", "Index", "Clientes", null , new {Styles= " color:#f0fff0; font-cp" })</li>
+                <li>@Html.ActionLink("Clientes", "Index", "Clientes", null , new {Styles= "color:#f0fff0; font-cp" })</li>
                 <li>@Html.ActionLink("Deudores", "Index", "Deudores")</li>
                 <li>@Html.ActionLink("Bitacora", "Index", "Log")</li>
                 <li>@Html.ActionLink("Operaciones", "Index", "Operacion")</li>

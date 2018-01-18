@@ -4,19 +4,17 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
 using WebAplicacion.Models;
 using WebAplicacion.Models.Json;
-using System.Text.RegularExpressions;
+using WebAplicacion.Models.Clientes;
+using WebAplicacion.Models.entities;
 
 namespace WebAplicacion.Controllers.Servicios
 {
     public class Cliente
     {
-        private Mant_ClientesViewModel clienteold = new Mant_ClientesViewModel();
-
+        private MantClientesViewModel clienteold = new MantClientesViewModel();
         private readonly HttpClient client = new HttpClient();
 
         public Cliente()
@@ -24,7 +22,7 @@ namespace WebAplicacion.Controllers.Servicios
             
         }
 
-        public async Task<Mant_ClientesViewModel> ConsultaClienteBac(int id, string paramd)
+        public async Task<MantClientesViewModel> ConsultaClienteBac(int id, string paramd)
         {
            var   valor = "";
         
@@ -41,24 +39,24 @@ namespace WebAplicacion.Controllers.Servicios
                 paramid = "0";
             }
 
-            IList<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
+            IList<MantClientesViewModel> searchResults = new List<MantClientesViewModel>();
             try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/" + paramid + "?" + id);
-                JObject desjson = JObject.Parse(json);
+                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/" + paramid + "?param=" + id);
+                var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
-                foreach (JToken result in results)
+                foreach (var result in results)
                 {
-                    Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                    MantClientesViewModel searchResult = result.ToObject<MantClientesViewModel>();
                     searchResults.Add(searchResult);
                 }
 
             }
             catch (Exception )
             {
-                var searchResult = new Mant_ClientesViewModel();
+                var searchResult = new MantClientesViewModel();
                 searchResults.Add(searchResult);
 
 
@@ -73,10 +71,10 @@ namespace WebAplicacion.Controllers.Servicios
 
 
 
-         public async Task<List<Mant_ClientesViewModel>> ConsultaClienteFac(string rut)
+         public async Task<List<MantClientesViewModel>> ConsultaClienteFac(string rut)
         {
             
-           var searchResults = new List<Mant_ClientesViewModel>();
+           var searchResults = new List<MantClientesViewModel>();
             try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
@@ -86,7 +84,7 @@ namespace WebAplicacion.Controllers.Servicios
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["clientedto"].Children().ToList();
                 foreach (JToken result in results)
                 {
-                    Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                    MantClientesViewModel searchResult = result.ToObject<MantClientesViewModel>();
                     searchResults.Add(searchResult);
                 }
 
@@ -94,7 +92,7 @@ namespace WebAplicacion.Controllers.Servicios
             catch (Exception ex)
             {
 
-                Mant_ClientesViewModel searchResult =  new Mant_ClientesViewModel();
+                MantClientesViewModel searchResult =  new MantClientesViewModel();
                 searchResults.Add(searchResult);
             }
             
@@ -102,7 +100,7 @@ namespace WebAplicacion.Controllers.Servicios
         }
 
 
-        public async Task Guardar(Mant_ClientesViewModel _cliente)
+        public async Task Guardar(MantClientesViewModel _cliente)
         {
 
             var reflex = new Reflectiones();
@@ -117,9 +115,9 @@ namespace WebAplicacion.Controllers.Servicios
 
 
 
-        public async Task<List<Mant_ClientesViewModel>> GetClienteNombre(int id, string nombre)
+        public async Task<List<MantClientesViewModel>> GetClienteNombre(int id, string nombre)
         { 
-            List<Mant_ClientesViewModel> searchResults = new List<Mant_ClientesViewModel>();
+            List<MantClientesViewModel> searchResults = new List<MantClientesViewModel>();
                 try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
@@ -129,14 +127,14 @@ namespace WebAplicacion.Controllers.Servicios
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
                 foreach (JToken result in results)
                 {
-                    Mant_ClientesViewModel searchResult = result.ToObject<Mant_ClientesViewModel>();
+                    MantClientesViewModel searchResult = result.ToObject<MantClientesViewModel>();
                     searchResults.Add(searchResult);
                 }
 
             }
                 catch (Exception ex)
                 {
-                    Mant_ClientesViewModel searchResult =new Mant_ClientesViewModel();
+                    MantClientesViewModel searchResult =new MantClientesViewModel();
                     searchResults.Add(searchResult);
              
                 }
@@ -148,7 +146,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         
 
-        public ClienteJson mapper(Mant_ClientesViewModel cliente)
+        public ClienteJson mapper(MantClientesViewModel cliente)
         {
             ClienteJson _cliente = new ClienteJson();
             _cliente.rut = cliente.Rut;
@@ -170,9 +168,27 @@ namespace WebAplicacion.Controllers.Servicios
         }
 
 
+        public async Task<List<Politicas>> DefPoliticas()
+       {
+           var searchResults = new List<Politicas>();
+           try
+           {
+               client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+               client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+               var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarLimitesDeudor");
+               var desjson = JObject.Parse(json);
+               IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultarLimitesDeudor"].Children().ToList();
+               searchResults.AddRange(results.Select(result => result.ToObject<Politicas>()));
+           }
+           catch (Exception ex)
+           {
+               var searchResult = new Politicas();
+               searchResults.Add(searchResult);
 
+           }
 
-
+           return searchResults;
+        }
 
 
     }

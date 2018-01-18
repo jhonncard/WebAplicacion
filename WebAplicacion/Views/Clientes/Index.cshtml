@@ -1,4 +1,4 @@
-﻿@model WebAplicacion.Models.Mant_ClientesViewModel
+﻿@model WebAplicacion.Models.Clientes.MantClientesViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -16,53 +16,7 @@
         <hr/>
     <div class="row">
        
-            <div class="col-lg-12">
-                @*<div class="col-lg-4">*@
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color: #3598D4; color: #ffffff; font-weight: bold;">
-                        Clientes
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td>
-                                        <input type="text" name="nombre" id="nombre" placeholder="Indique nombre ó Rut"
-                                               style="font-size: 12px;" class="form-control buscar" onkeyup="GetClientePorNombre();"
-                                               onkeypress="return SoloLetrasYNumeros(event);"/>
-                                        <ul class="list-group" id="busquedaCliente" style="display: none; max-height: 200px; overflow: auto;"></ul>
-                                        <span class="help-block">* Rut sin puntos, ni guión, ni dígito verificador</span>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td rowspan="2" aria-valuemaxalign="top">&nbsp;<img src="~/Content/img/ajax-loadercircular.gif"
-                                                                                          style="display: none; width: 30px;" id="loaderCliente" align="top"/></td>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                       
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="float: right; ">
-                                        <button type="button" class="btn btn-primary" onclick="GetCliente();">
-                                          Buscar Cliente  <i class="fa fa-search"></i> 
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            
-        </div>
-
-       
-        <div class="row ">
-
-           
-
-
+        
             <!-- Vista Parcial Datos principales-->
             <h4 class="separador">Mantenedor de condiciones del Cliente</h4>
             @*@Html.ValidationSummary(true, "", new {@class = "text-danger"})*@
@@ -70,8 +24,14 @@
             <div class="row">
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Cliente, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-4">
+                    @Html.LabelFor(model => model.Rut, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.Rut, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Rut, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Cliente, htmlAttributes: new {@class = "control-label col-md-2 "})
+                    <div class="col-md-5">
                         @Html.EditorFor(model => model.Cliente, new {htmlAttributes = new {@class = "form-control"}})
                         @Html.ValidationMessageFor(model => model.Cliente, "", new {@class = "text-danger"})
                     </div>
@@ -79,18 +39,16 @@
                 
                    @*</div>*@
 
-                    @Html.LabelFor(model => model.Rut, htmlAttributes: new {@class = "control-label col-md-2"})
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Rut, new {htmlAttributes = new {@class = "form-control"}})
-                        @Html.ValidationMessageFor(model => model.Rut, "", new {@class = "text-danger"})
-                    </div>
+                   
                 </div>
             </div>
 
 
-            <div class="row">
-                <h4 class="center separador">Administrador de Excepcoones</h4>
-                <hr/>
+        <div class="row">
+            <h4 class="center separador">Administrador de Excepcoones</h4>
+            <hr />
+            <div class="col-md-6">
+               
                 <div class="form-group">
                     @Html.LabelFor(model => model.Bloqueo, htmlAttributes: new {@class = "control-label col-md-2"})
                     <div class="col-md-4">
@@ -101,9 +59,9 @@
                     <div class="col-md-4">
                         @Html.LabelFor(model => model.Clasificacion, new {htmlAttributes = new {@class = "form-control"}})
                     </div>
-
-
                 </div>
+
+
                 <div class="form-group">
                     @Html.Label("Plazo Operaciones", htmlAttributes: new {@class = "control-label col-md-2"})
                     <div class="col-md-10 form-inline">
@@ -124,7 +82,93 @@
                     <span class="col-md-7">%</span>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdValidacion, htmlAttributes: new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                       @Html.DropDownListFor(model => model.IdValidacion,new SelectList (ViewBag.ValidacionPoliticas,"Id","Glosa"), "---Select una Politica ---")
+                        @Html.ValidationMessageFor(model => model.IdValidacion, "", new {@class = "text-danger"})
+                    </div>
+                    
+                </div>
+                <div id="politicas" style="visibility: visible">
+                    @*<div id ="politicas" style="visibility: hidden">*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LimiteTipoA, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.LimiteTipoA, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            @Html.ValidationMessageFor(model => model.LimiteTipoA, "", new {@class = "text-danger"})
+                        </div>
+                        <span class="col-md-5">%</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LimiteTipoB, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.LimiteTipoB, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            @Html.ValidationMessageFor(model => model.LimiteTipoB, "", new {@class = "text-danger"})
+                        </div>
+                        <span class="col-md-5">%</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LimiteTipoC, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.LimiteTipoC, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            @Html.ValidationMessageFor(model => model.LimiteTipoC, "", new {@class = "text-danger"})
+                        </div>
+                        <span class="col-md-5">%</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LimiteTipoD, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.LimiteTipoD, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            @Html.ValidationMessageFor(model => model.LimiteTipoD, "", new {@class = "text-danger"})
+                        </div>
+                        <span class="col-md-5">%</span>
+                    </div>
+                </div>
+                <div id="particular" style="visibility: visible">
 
+                    @*<div id="particular" style="visibility: hidden">*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RutParticular, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.RutParticular, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.RutParticular, "", new {@class = "text-danger"})
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LimiteParticular, htmlAttributes: new {@class = "control-label col-md-4"})
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.LimiteParticular, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            @Html.ValidationMessageFor(model => model.LimiteParticular, "", new {@class = "text-danger"})
+                        </div>
+                        <span class="col-md-5">%</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
             @*<div class="form-group">
                 @Html.LabelFor(model => model.Clasificacion, htmlAttributes: new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
@@ -139,8 +183,7 @@
             </div>
         </div>
     </div>
-   
-    }
+}
 
     @*<div>
         @Html.ActionLink("Back to List", "Index")
@@ -148,11 +191,35 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 
- 
     <script type="text/javascript">
-        function GetClientePorNombre()
-        {
+      
+
+        $(document).ready(
+            function () {
+                $("#Cliente").autocomplete({
+                    source: "/Clientes/GetClientesPorNombre",
+                    minLength: 3
+                });
+
+                $("#Rut").autocomplete({
+                    source: "/Clientes/GetClientesPorRut",
+                    minLength: 6
+                });
+
+            });
+
+        $("#IdValidacion").change(function () {
+            alert("Handler for .change() called.");
+        });
+
+
+
+
+
+
+        @*function GetClientePorNombre() {
             $("#detalleCliente").hide();
             $("#busquedaCliente").hide();
             var nombre = $("#nombre").val();
@@ -160,20 +227,22 @@
             if (isNaN(nombre)) {
                 if (nombre.length > 3) {
                     $("#loaderCliente").fadeIn();
-                    var daton = {"nombre": nombre};
+                    var daton = { "nombre": nombre };
                     $.ajax({
-                        url:"@Url.Action("GetClientePorNombre","Clientes")",
+                        url: "@Url.Action("GetClientePorNombre", "Clientes")",
                         type: "POST",
                         data: JSON.stringify(daton),
                         dataType: "json",
                         contentType: "application/json",
-                        success: function (response) {
+                        success: function(response) {
                             $("#busquedaCliente").text("");
                             if (response.Clientes.length > 0) {
                                 $("#loaderCliente").fadeOut('slow');
                                 for (var i = 0; i < response.Clientes.length; i++) {
                                     var cadena = "";
-                                    cadena += "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" + response.Clientes[i].Rut + "&quot;, ";
+                                    cadena +=
+                                        "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
+                                        response.Clientes[i].Rut + "&quot;, ";
                                     cadena += "&quot;" + response.Clientes[i].Cliente + "&quot;'>";
                                     cadena += "<i class='fa fa-user'></i> " + response.Clientes[i].Cliente + "</li>";
                                     $("#busquedaCliente").append(cadena);
@@ -182,17 +251,17 @@
                             } else {
                                 $("#loaderCliente").fadeOut('slow');
                                 var cadena = "";
-                                cadena += "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
+                                cadena +=
+                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
                                 $("#busquedaCliente").append(cadena);
                                 $("#busquedaCliente").fadeIn('slow');
                             }
                         },
-                        error: function () {
+                        error: function() {
                             console.log("Error al buscar cliente");
                         }
                     });
-                }
-                else {
+                } else {
                     $("#loaderCliente").hide();
                     if (nombre.length < 1) {
                         $("#busquedaCliente").text("");
@@ -200,45 +269,47 @@
                     } else {
                         $("#busquedaCliente").text("");
                         var cadena = "";
-                        cadena += "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');>* Búsqueda debe ser mayor a 3 caracteres</li>";
+                        cadena +=
+                            "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');>* Búsqueda debe ser mayor a 3 caracteres</li>";
                         $("#busquedaCliente").append(cadena);
                         $("#busquedaCliente").fadeIn('slow');
                     }
                 }
-            }
-            else {
+            } else {
                 if (nombre.length > 6) {
                     $("#loaderCliente").fadeIn();
-                    var dato = {"nombre": nombre};
+                    var dato = { "nombre": nombre };
                     $.ajax({
-                        url:"@Url.Action("GetClientePorRut","Clientes")",
+                        url: "@Url.Action("GetClientePorRut", "Clientes")",
                         type: "POST",
                         data: JSON.stringify(dato),
                         dataType: "json",
                         contentType: "application/json",
-                        success: function (response) {
+                        success: function(response) {
                             $("#busquedaCliente").text("");
                             if (response.Clientes.length > 0) {
                                 $("#loaderCliente").fadeOut('slow');
 
                                 for (var i = 0; i < response.Clientes.length; i++) {
                                     var cadena = "";
-                                    cadena += "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" + response.Clientes[i].rut + "&quot;   , ";
+                                    cadena +="<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
+                                        response.Clientes[i].rut +"&quot;   , ";
                                     cadena += "&quot;" + response.Clientes[i].Nombre + "&quot;'>";
                                     cadena += "<i class='fa fa-user'>;" +
-                                        @* "</i> " + response.Clientes[i].Nombre + "</li>";*@
+                                        "</i> " + response.Clientes[i].Nombre + "</li>";
                                         $("#busquedaCliente").append(cadena);
                                 }
                                 $("#busquedaCliente").fadeIn('slow');
                             } else {
                                 $("#loaderCliente").fadeOut('slow');
                                 var cadena = "";
-                                cadena += "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
+                                cadena +=
+                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
                                 $("#busquedaCliente").append(cadena);
                                 $("#busquedaCliente").fadeIn('slow');
                             }
                         },
-                        error: function () {
+                        error: function() {
                             console.log("Error al buscar cliente");
                         }
                     });
@@ -249,25 +320,20 @@
                 }
             }
 
-        }
+        }*@
 
 
-
-
-
-
-        function GetCliente(idCliente, nombreCliente)
-        {
+        @*function GetCliente(idCliente, nombreCliente) {
             $("#div_editCliente").hide();
 
-            $("#Cliente").val(nombreCliente);
-            $("#Rut").val(idCliente);
+            //$("#Cliente").val(nombreCliente);
+            //$("#Rut").val(idCliente);
             $("#busquedaCliente").hide();
             $.ajax({
                 url: '@Url.Action("BuscarDetalle", "Clientes")',
                 type: 'POST',
                 data: { rut: idCliente },
-                success: function (result) {
+                success: function(result) {
                     if (result.success) {
                         //Significa que fue!
                         //Mandas alerta
@@ -276,18 +342,15 @@
                     }
                 }
             });
-        }
+        }*@
 
 
-
-//$("#div_editCliente").load(baseUrl + "/clientescarterizados/getclienteporid", {
+        //$("#div_editCliente").load(baseUrl + "/clientescarterizados/getclienteporid", {
         //    idCliente: idCliente,
         //    viewName: "_editCliente"
         //});
 
         //$("#div_editCliente").fadeIn('slow');
-
-
 
 
     </script>

@@ -89,11 +89,11 @@ namespace WebAplicacion.Controllers
 
             if (!await reflex.Comprar(oldmodel, modelo, "user", "condiciones"))  return View();
 
-            
+
 
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-            var response = await cliente.PostAsJsonAsync ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
+            var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
 
             return RedirectToAction("Index");
         }

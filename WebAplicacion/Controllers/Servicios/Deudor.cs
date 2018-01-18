@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using WebAplicacion.Models;
+using WebAplicacion.Models.Deudores;
+using WebAplicacion.Models.Dto;
 
 namespace WebAplicacion.Controllers.Servicios
 {
     public class Deudor
     {
-        private Mant_DuedoresViewModel clienteold = new Mant_DuedoresViewModel();
+        private MantDuedoresViewModel clienteold = new MantDuedoresViewModel();
 
         private readonly HttpClient client = new HttpClient();
 
@@ -24,10 +26,10 @@ namespace WebAplicacion.Controllers.Servicios
 
 
 
-        public async Task<List<Mant_DuedoresViewModel>> ConsultarDeudor(int paramid, string id)
+        public async Task<List<MantDuedoresViewModel>> ConsultarDeudor(int paramid, string id)
         {
 
-          var searchResults = new List<Mant_DuedoresViewModel>();
+          var searchResults = new List<MantDuedoresViewModel>();
             try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
@@ -39,7 +41,7 @@ namespace WebAplicacion.Controllers.Servicios
                     .ToList();
                 foreach (var result in results)
                 {
-                    var searchResult = result.ToObject<Mant_DuedoresViewModel>();
+                    var searchResult = result.ToObject<MantDuedoresViewModel>();
                     searchResults.Add(searchResult);
                 }
 
@@ -47,7 +49,7 @@ namespace WebAplicacion.Controllers.Servicios
             catch (Exception )
             {
 
-                var searchResult = new Mant_DuedoresViewModel();
+                var searchResult = new MantDuedoresViewModel();
                 searchResults.Add(searchResult);
             }
 
@@ -58,10 +60,10 @@ namespace WebAplicacion.Controllers.Servicios
 
 
 
-        public async Task<Mant_DuedoresViewModel> ConsultarDeudorFac(string rut)
+        public async Task<MantDuedoresViewModel> ConsultarDeudorFac(string rut)
         {
 
-           var searchResults = new List<Mant_DuedoresViewModel>();
+           var searchResults = new List<MantDuedoresViewModel>();
             try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
@@ -74,14 +76,14 @@ namespace WebAplicacion.Controllers.Servicios
                     .ToList();
                 foreach (var result in results)
                 {
-                    Mant_DuedoresViewModel searchResult = result.ToObject<Mant_DuedoresViewModel>();
+                    MantDuedoresViewModel searchResult = result.ToObject<MantDuedoresViewModel>();
                     searchResults.Add(searchResult);
                 }
 
             }
             catch (Exception )
             {
-                var searchResult = new Mant_DuedoresViewModel();
+                var searchResult = new MantDuedoresViewModel();
                 searchResults.Add(searchResult);
             }
 
@@ -90,7 +92,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         }
         
-        public async Task GuardarDeudor(Mant_DuedoresViewModel modelo)
+        public async Task GuardarDeudor(MantDuedoresViewModel modelo)
         {
             var reflex = new Reflectiones();
             if (await reflex.Comprar((ConsultarDeudorFac(modelo.Rut)), modelo, "user", "Deudores"))
@@ -105,9 +107,9 @@ namespace WebAplicacion.Controllers.Servicios
 
       }
 
-        public async Task<List<Mant_DuedoresViewModel>> GetDeudorPorNombre(int param,  string nombre)
+        public async Task<List<MantDuedoresViewModel>> GetDeudorPorNombre(int param,  string nombre)
         {
-            var searchResults = new List<Mant_DuedoresViewModel>();
+            var searchResults = new List<MantDuedoresViewModel>();
             try
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
@@ -117,7 +119,7 @@ namespace WebAplicacion.Controllers.Servicios
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
                 foreach (JToken result in results)
                 {
-                    Mant_DuedoresViewModel searchResult = result.ToObject<Mant_DuedoresViewModel>();
+                    MantDuedoresViewModel searchResult = result.ToObject<MantDuedoresViewModel>();
                     searchResults.Add(searchResult);
                 }
 
@@ -125,7 +127,7 @@ namespace WebAplicacion.Controllers.Servicios
             catch (Exception)
             {
 
-                var searchResult = new Mant_DuedoresViewModel();
+                var searchResult = new MantDuedoresViewModel();
                 searchResults.Add(searchResult);
             }
             return searchResults;
@@ -136,9 +138,9 @@ namespace WebAplicacion.Controllers.Servicios
 
 
 
-        private Mant_MduedoresDto MapperMantMduedoresDto(Mant_DuedoresViewModel deudor)
+        private MantMduedoresDto MapperMantMduedoresDto(MantDuedoresViewModel deudor)
         {
-            var _deudor = new Mant_MduedoresDto
+            var _deudor = new MantMduedoresDto
             {
 
                 Rut = deudor.Rut.ToString(),
