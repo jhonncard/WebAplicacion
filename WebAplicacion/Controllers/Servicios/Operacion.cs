@@ -106,7 +106,7 @@ namespace WebAplicacion.Controllers.Servicios
                
                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                HttpResponseMessage response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mapperoperaciones(modelo));
+                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mapperoperaciones(modelo));
                 resulstado = true;
             }
             catch (Exception )
@@ -132,12 +132,6 @@ namespace WebAplicacion.Controllers.Servicios
             }
             return resulstado;
         }
-
-
-        
-
-
-        
 
         public async Task<bool> GrabarDocumentoRelacion(ListCargaMasivaViewModels modelo)
         {
@@ -381,14 +375,14 @@ namespace WebAplicacion.Controllers.Servicios
         {
             var uniJson = new DocumentoRelacionJson
             {
-              // RutCliente = detalles.
-              // NroOperRemesa =
-              // CodTipoOperacion =
-              // CodCobranza =
-              // CodResponsabilidad =
-              // CodSeguro =
-              // Flag =
-          };
+                RutCliente = modelo.Opercion.RutCliente
+                 NroOperRemesa = 
+                 CodTipoOperacion =
+                 CodCobranza =
+                 CodResponsabilidad =
+                 CodSeguro =
+                 Flag =
+            };
             
         
         return uniJson;

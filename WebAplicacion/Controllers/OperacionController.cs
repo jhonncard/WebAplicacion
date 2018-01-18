@@ -34,15 +34,18 @@ namespace WebAplicacion.Controllers
         //: Factoring/Operacion
         public async Task<ActionResult> Index()
         {
-            var modelo = new ListCargaMasivaViewModels();
-            modelo.Opercion = new OperacionViewModel();
-            modelo.Doperaciones = new List<DetalleOperacionesViewModel>();
+            var modelo = new ListCargaMasivaViewModels
+            {
+                Opercion = new OperacionViewModel(),
+                Doperaciones = new List<DetalleOperacionesViewModel>()
+            };
             var ope = new Operacion();
             var cofgf = new ConfFinanciera();
             ViewBag.tipooeracion = await LlamarServicios(1);
             ViewBag.responsabilidad = await LlamarServicios(2);
             ViewBag.cobranza = await LlamarServicios(3);
             ViewBag.seguro = await LlamarServicios(4);
+
             ViewBag.empresas = await cofgf.Empresas();
             ViewBag.fechaoperacion = await cofgf.FechaProceso();
             ViewBag.codigomoneda = await cofgf.Monedas();

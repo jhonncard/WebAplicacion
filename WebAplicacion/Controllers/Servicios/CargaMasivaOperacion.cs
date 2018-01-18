@@ -14,7 +14,8 @@ namespace WebAplicacion.Controllers.Servicios
         private readonly ConsultarDatosComunes1 condat1 = new ConsultarDatosComunes1();
         private readonly ConsultarDatosComunes2 condat2 = new ConsultarDatosComunes2();
         private readonly ConsultarDatosComunes3 condat3 = new ConsultarDatosComunes3();
-        private string marcar = "@Class='classalerta'";
+        private const string marcar = "@Class='classalerta'";
+
         public bool CargaMasiva(ListCargaMasivaViewModels modelo)
         {
             var repuesta = false;
