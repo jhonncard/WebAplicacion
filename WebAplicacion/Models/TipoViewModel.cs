@@ -5,7 +5,7 @@ namespace WebAplicacion.Models
 {
     public class TipoViewModel
     {
-        [Key]
+       
         public Nullable<int> id { get;  }
 
         [Display(Name = "Tipo deudor")]

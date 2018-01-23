@@ -37,18 +37,18 @@ namespace WebAplicacion.Controllers.Servicios
 
                 var desjson = JObject.Parse(json);
               
-                Financie.Comision = (decimal)desjson["dtoResponseSetResultados"]["Comision"];
-                Financie.ComisionMin = (decimal)desjson["dtoResponseSetResultados"]["ComisionMin"];
-                Financie.ComisionMax = (decimal)desjson["dtoResponseSetResultados"]["ComisionMax"];
-                Financie.Tasa = (decimal)desjson["dtoResponseSetResultados"]["Tasa"];
-                Financie.Anticipo = (decimal)desjson["dtoResponseSetResultados"]["Anticipo"];
-                Financie.GastoOper = (decimal)desjson["dtoResponseSetResultados"]["GastoOper"];
-                Financie.PlazoMin = (int)desjson["dtoResponseSetResultados"]["PlazoMin"];
-                Financie.PlazoMax = (int)desjson["dtoResponseSetResultados"]["PlazoMax"];
-                Financie.DiasLinea = (int)desjson["dtoResponseSetResultados"]["DiasLinea"];
-                Financie.PlazoEmision = (decimal)desjson["dtoResponseSetResultados"]["PlazoEmision"];
-                Financie.Notificacion = (decimal)desjson["dtoResponseSetResultados"]["Notificacion"];
-                Financie.NotificacionDocto = (decimal)desjson["dtoResponseSetResultados"]["NotificacionDocto"];
+                Financie.Comision =(decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["Comision"];
+                Financie.ComisionMin = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["ComisionMin"];
+                Financie.ComisionMax = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["ComisionMax"];
+                Financie.Tasa = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["Tasa"];
+                Financie.Anticipo = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["Anticipo"];
+                Financie.GastoOper = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["GastoOper"];
+                Financie.PlazoMin = (int)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["PlazoMin"];
+                Financie.PlazoMax = (int)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["PlazoMax"];
+                Financie.DiasLinea = (int)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["DiasLinea"];
+                Financie.PlazoEmision = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["PlazoEmision"];
+                Financie.Notificacion = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["Notificacion"];
+                Financie.NotificacionDocto = (decimal)desjson["dtoResponseSetResultados"]["dtoDatosFinancieros"][0]["NotificacionDocto"];
             }
             catch (Exception )
             {

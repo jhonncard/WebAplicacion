@@ -9,7 +9,7 @@ namespace WebAplicacion.Models.Deudores
 {
     public class MantDuedoresViewModel
     {
-        [Key]
+    
         public string Rut { set;  get; }
 
         [Required]

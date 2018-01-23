@@ -1,16 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using WebAplicacion.Models.Operaciones;
-
 
 namespace WebAplicacion.util
 {
@@ -28,7 +16,7 @@ namespace WebAplicacion.util
 
             for (var i = cadenaNumero.Length - 1; i >= 0; i--)
             {
-                calculador = calculador + (factores[indiceFactor] * int.Parse(cadenaNumero.Substring(i, 1)));
+                calculador = calculador + (factores[indiceFactor] * Int32.Parse(cadenaNumero.Substring(i, 1)));
                 indiceFactor--;
             }
 
@@ -69,14 +57,37 @@ namespace WebAplicacion.util
             return DateTime.TryParse(fecha, out _fecha);
 
         }
+        #endregion
+    
 
-      
+        #region valorduplicadoLista
+
+        public static string RegistrosRepetidos(object obj1)
+        {
+          var inf = "";
+          var tOb1 = obj1.GetType();
+        
+           
 
 
 
+
+
+            return inf ;
+        }
 
 
         #endregion
 
+
+        public static int Diffechas(DateTime fecha1, DateTime fecha2)
+        {
+            var val = 0;
+
+            val = (int)(fecha2 - fecha1).Days;
+
+            return val;
+        }
     }
+
 }

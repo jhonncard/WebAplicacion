@@ -26,7 +26,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Rut, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.Rut, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.Rut, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Rut, "", new { @class = "text-danger" })
                     </div>
 
@@ -76,17 +76,20 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Retencion, htmlAttributes: new {@class = "control-label col-md-2"})
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.Retencion, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
-                        @Html.ValidationMessageFor(model => model.Retencion, "", new {@class = "text-danger"})
-                    </div>
-                    <span class="col-md-7">%</span>
+                        <div class="input-group">
+                            @Html.EditorFor(model => model.Retencion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayName("%") } })
+                            <span class="input-group-addon">%</span>
+                        </div>
+                            @Html.ValidationMessageFor(model => model.Retencion, "", new { @class = "text-danger" })
+                        </div>
+                  
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     @Html.LabelFor(model => model.IdValidacion, htmlAttributes: new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                       @Html.DropDownListFor(model => model.IdValidacion,new SelectList (ViewBag.ValidacionPoliticas,"Id","Glosa"), "---Select una Politica ---")
+                       @*@Html.DropDownListFor(model => model.IdValidacion,new SelectList (ViewBag.ValidacionPoliticas,"Id","Glosa"), "---Select una Politica ---")*@
                         @Html.ValidationMessageFor(model => model.IdValidacion, "", new {@class = "text-danger"})
                     </div>
                     
@@ -96,23 +99,32 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.LimiteTipoA, htmlAttributes: new {@class = "control-label col-md-4"})
                         <div class="col-md-3">
-                            @Html.EditorFor(model => model.LimiteTipoA, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
-                            @Html.ValidationMessageFor(model => model.LimiteTipoA, "", new {@class = "text-danger"})
+                            <div class="input-group">
+                               @Html.EditorFor(model => model.LimiteTipoA, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                                <span class="input-group-addon">%</span>
+                            </div>
+                             @Html.ValidationMessageFor(model => model.LimiteTipoA, "", new {@class = "text-danger"})
                         </div>
-                        <span class="col-md-5">%</span>
+                       
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.LimiteTipoB, htmlAttributes: new {@class = "control-label col-md-4"})
                         <div class="col-md-3">
-                            @Html.EditorFor(model => model.LimiteTipoB, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
-                            @Html.ValidationMessageFor(model => model.LimiteTipoB, "", new {@class = "text-danger"})
-                        </div>
-                        <span class="col-md-5">%</span>
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.LimiteTipoB, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayName("%") } })
+                                <span class="input-group-addon">%</span>
+                            </div>
+                                @Html.ValidationMessageFor(model => model.LimiteTipoB, "", new { @class = "text-danger" })
+                            </div>
+                       
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.LimiteTipoC, htmlAttributes: new {@class = "control-label col-md-4"})
                         <div class="col-md-3">
-                            @Html.EditorFor(model => model.LimiteTipoC, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.LimiteTipoC, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayName("%") } })
+                                <span class="input-group-addon">%</span>
+                            </div>
                             @Html.ValidationMessageFor(model => model.LimiteTipoC, "", new {@class = "text-danger"})
                         </div>
                         <span class="col-md-5">%</span>
@@ -120,10 +132,13 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.LimiteTipoD, htmlAttributes: new {@class = "control-label col-md-4"})
                         <div class="col-md-3">
-                            @Html.EditorFor(model => model.LimiteTipoD, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
-                            @Html.ValidationMessageFor(model => model.LimiteTipoD, "", new {@class = "text-danger"})
-                        </div>
-                        <span class="col-md-5">%</span>
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.LimiteTipoD, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayName("%") } })
+                                <span class="input-group-addon">%</span>
+                            </div>
+                                @Html.ValidationMessageFor(model => model.LimiteTipoD, "", new { @class = "text-danger" })
+                            </div>
+                       
                     </div>
                 </div>
                 <div id="particular" style="visibility: visible">
@@ -140,30 +155,17 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.LimiteParticular, htmlAttributes: new {@class = "control-label col-md-4"})
                         <div class="col-md-3">
+                            <div class="input-group">
                             @Html.EditorFor(model => model.LimiteParticular, new {htmlAttributes = new {@class = "form-control", placeholder = Html.DisplayName("%")}})
+                            <span class="input-group-addon">%</span>
+                        </div>
+                        </div>
                             @Html.ValidationMessageFor(model => model.LimiteParticular, "", new {@class = "text-danger"})
                         </div>
-                        <span class="col-md-5">%</span>
+                    
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -182,7 +184,7 @@
                 <input type="reset" value="Cancelar" class="btn btn-primary "/>
             </div>
         </div>
-    </div>
+    @*</div>*@
 }
 
     @*<div>
@@ -194,10 +196,10 @@
     @Scripts.Render("~/bundles/bootstrap")
 
     <script type="text/javascript">
-      
+
 
         $(document).ready(
-            function () {
+            function() {
                 $("#Cliente").autocomplete({
                     source: "/Clientes/GetClientesPorNombre",
                     minLength: 3
@@ -210,8 +212,49 @@
 
             });
 
-        $("#IdValidacion").change(function () {
-            alert("Handler for .change() called.");
+
+        $("#Cliente").keypress(function (event) {
+            if (event.which == 13) {
+                var nombre = $("#Cliente").val();
+                var dato = { "nombre": nombre };
+                $.ajax({
+                    url: "/Clientes/GetClientePorNombre",
+                    type: "POST",
+                    data: JSON.stringify(dato),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+
+                        $("#Rut").val(response.Rut);
+                       cargardatosf();
+
+                    },
+                    error: function () {
+                        alert("hay un error");
+                    }
+                });
+
+            }
+        });
+
+        $("#Opercion_RutCliente").keypress(function (event) {
+            if (event.which == 13) {
+                var nombre = $("#Opercion_RutCliente").val();
+                var daton = { "nombre": nombre };
+                $.ajax({
+                    url: "/Clientes/GetClientePorRut",
+                    type: "POST",
+                    data: JSON.stringify(daton),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        $("#Opercion_Nombre").val(response[0].Cliente);
+
+                        cargardatosf();
+                    }
+                });
+
+            }
         });
 
 
@@ -219,139 +262,57 @@
 
 
 
-        @*function GetClientePorNombre() {
-            $("#detalleCliente").hide();
-            $("#busquedaCliente").hide();
-            var nombre = $("#nombre").val();
-            nombre = nombre.trim();
-            if (isNaN(nombre)) {
-                if (nombre.length > 3) {
-                    $("#loaderCliente").fadeIn();
-                    var daton = { "nombre": nombre };
-                    $.ajax({
-                        url: "@Url.Action("GetClientePorNombre", "Clientes")",
-                        type: "POST",
-                        data: JSON.stringify(daton),
-                        dataType: "json",
-                        contentType: "application/json",
-                        success: function(response) {
-                            $("#busquedaCliente").text("");
-                            if (response.Clientes.length > 0) {
-                                $("#loaderCliente").fadeOut('slow');
-                                for (var i = 0; i < response.Clientes.length; i++) {
-                                    var cadena = "";
-                                    cadena +=
-                                        "<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
-                                        response.Clientes[i].Rut + "&quot;, ";
-                                    cadena += "&quot;" + response.Clientes[i].Cliente + "&quot;'>";
-                                    cadena += "<i class='fa fa-user'></i> " + response.Clientes[i].Cliente + "</li>";
-                                    $("#busquedaCliente").append(cadena);
-                                }
-                                $("#busquedaCliente").fadeIn('slow');
-                            } else {
-                                $("#loaderCliente").fadeOut('slow');
-                                var cadena = "";
-                                cadena +=
-                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
-                                $("#busquedaCliente").append(cadena);
-                                $("#busquedaCliente").fadeIn('slow');
-                            }
-                        },
-                        error: function() {
-                            console.log("Error al buscar cliente");
-                        }
-                    });
-                } else {
-                    $("#loaderCliente").hide();
-                    if (nombre.length < 1) {
-                        $("#busquedaCliente").text("");
-                        $("#busquedaCliente").hide();
-                    } else {
-                        $("#busquedaCliente").text("");
-                        var cadena = "";
-                        cadena +=
-                            "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');>* Búsqueda debe ser mayor a 3 caracteres</li>";
-                        $("#busquedaCliente").append(cadena);
-                        $("#busquedaCliente").fadeIn('slow');
-                    }
-                }
-            } else {
-                if (nombre.length > 6) {
-                    $("#loaderCliente").fadeIn();
-                    var dato = { "nombre": nombre };
-                    $.ajax({
-                        url: "@Url.Action("GetClientePorRut", "Clientes")",
-                        type: "POST",
-                        data: JSON.stringify(dato),
-                        dataType: "json",
-                        contentType: "application/json",
-                        success: function(response) {
-                            $("#busquedaCliente").text("");
-                            if (response.Clientes.length > 0) {
-                                $("#loaderCliente").fadeOut('slow');
 
-                                for (var i = 0; i < response.Clientes.length; i++) {
-                                    var cadena = "";
-                                    cadena +="<li class='list-group-item' style='cursor:pointer;'); onclick='GetCliente(&quot;" +
-                                        response.Clientes[i].rut +"&quot;   , ";
-                                    cadena += "&quot;" + response.Clientes[i].Nombre + "&quot;'>";
-                                    cadena += "<i class='fa fa-user'>;" +
-                                        "</i> " + response.Clientes[i].Nombre + "</li>";
-                                        $("#busquedaCliente").append(cadena);
-                                }
-                                $("#busquedaCliente").fadeIn('slow');
-                            } else {
-                                $("#loaderCliente").fadeOut('slow');
-                                var cadena = "";
-                                cadena +=
-                                    "<li class='list-group-item' style='cursor:pointer; font-weight:bold;');><i class='fa fa-frown-o'></i> No existen resultados</li>";
-                                $("#busquedaCliente").append(cadena);
-                                $("#busquedaCliente").fadeIn('slow');
-                            }
-                        },
-                        error: function() {
-                            console.log("Error al buscar cliente");
-                        }
-                    });
-                } else {
-                    $("#loaderCliente").hide();
-                    $("#busquedaCliente").text("");
-                    $("#busquedaCliente").hide();
-                }
+
+
+
+        $("#IdValidacion").change(function() {
+            alert("Handler for .change() called.");
+            if ($("#IdValidacion").val() == "")
+            {
+
             }
-
-        }*@
-
-
-        @*function GetCliente(idCliente, nombreCliente) {
-            $("#div_editCliente").hide();
-
-            //$("#Cliente").val(nombreCliente);
-            //$("#Rut").val(idCliente);
-            $("#busquedaCliente").hide();
-            $.ajax({
-                url: '@Url.Action("BuscarDetalle", "Clientes")',
-                type: 'POST',
-                data: { rut: idCliente },
-                success: function(result) {
-                    if (result.success) {
-                        //Significa que fue!
-                        //Mandas alerta
-                    } else {
-                        //Significa que hubo error!
-                    }
-                }
-            });
-        }*@
+            else if ($("#IdValidacion").val() == "")
+            {
+            }
+            else if ($("#IdValidacion").val() == "")
+                {
+            }
+        });
 
 
-        //$("#div_editCliente").load(baseUrl + "/clientescarterizados/getclienteporid", {
-        //    idCliente: idCliente,
-        //    viewName: "_editCliente"
-        //});
+        //function cargardatosf() {
+        //    var rut = $("#Rut").val();
+        //   var datof = { "rut": rut};
+        //    alert(datof.rut + " " + datof.tipodoc + " " + datof.tipomond);
+        //    $.ajax({
+        //        url: "/Clientes/GetClienteDatosFinacieros",
+        //        type: "POST",
+        //        data: JSON.stringify(datof),
+        //        dataType: "json",
+        //        contentType: "application/json",
+        //        success: function(response) {
+        //            //$("#Opercion_ComisionMin").val(response.Financie.ComisionMin);
+        //            //$("#Opercion_ComisionMax").val(response.Financie.ComisionMax);
+        //            //$("#Opercion_Comision").val(response.Financie.Comision);
+        //            //$("#Opercion_TasaOperacion").val(response.Financie.Tasa);
+        //            //$("#Opercion_Financiamiento").val(response.Financie.Anticipo);
+        //            //$("#Opercion_Gastosope").val(response.Financie.GastoOper);
+        //            //$("#Opercion_sNotificacion").val(response.Financie.NotificacionDocto);
+        //            //$("#Opercion_vNotificacion").val(response.Financie.Notificacion);
 
-        //$("#div_editCliente").fadeIn('slow');
 
+        //        }
+        //    });
+
+
+
+     
+
+
+      
+
+      
 
     </script>
 }

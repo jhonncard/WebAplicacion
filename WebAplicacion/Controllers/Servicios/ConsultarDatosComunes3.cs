@@ -153,6 +153,7 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
+
         public async Task<List<Articulo84>> AumentoArt84(int paramd0, int paramd1, int paramd2)
         {
 

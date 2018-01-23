@@ -55,7 +55,7 @@ namespace WebAplicacion.Controllers.Servicios
                                 Monto =decimal.Parse( sheet.GetRow(row).GetCell(2).NumericCellValue.ToString()),
                                 FechaEmision = Convert.ToDateTime(sheet.GetRow(row).GetCell(3).DateCellValue.ToString()),
                                 FechaVencimeinto = Convert.ToDateTime(sheet.GetRow(row).GetCell(4).DateCellValue.ToString()),
-                                Pais = sheet.GetRow(row).GetCell(5).NumericCellValue.ToString(),
+                                Pais =(int)sheet.GetRow(row).GetCell(5).NumericCellValue,
                                 Plaza = sheet.GetRow(row).GetCell(6).NumericCellValue.ToString(),
                                 Nombre = sheet.GetRow(row).GetCell(7).StringCellValue,
                              

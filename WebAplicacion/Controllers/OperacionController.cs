@@ -41,52 +41,38 @@ namespace WebAplicacion.Controllers
             };
             var ope = new Operacion();
             var cofgf = new ConfFinanciera();
-            ViewBag.tipooeracion = await LlamarServicios(1);
-            ViewBag.responsabilidad = await LlamarServicios(2);
-            ViewBag.cobranza = await LlamarServicios(3);
-            ViewBag.seguro = await LlamarServicios(4);
+            var cons3 = new ConsultarDatosComunes3();
+            modelo.Opercion.Guardar = "N";
+            var tipooeracion = await LlamarServicios(1);
+            var responsabilidad = await LlamarServicios(2);
+            var cobranza = await LlamarServicios(3);
+            var seguro = await LlamarServicios(4);
+            var empresas = await cofgf.Empresas();
+            var codigomoneda = await cofgf.Monedas();
+            var tiopodoc = await cofgf.Documentos();
+            var listasinoope = ope.LIstaSiNo();
+            //var art84 = await cons3.AumentoArt84()
+            tiopodoc[0].Selected = true;
+            codigomoneda[2].Selected = true;
 
-            ViewBag.empresas = await cofgf.Empresas();
-            ViewBag.fechaoperacion = await cofgf.FechaProceso();
-            ViewBag.codigomoneda = await cofgf.Monedas();
-            ViewBag.tiopodoc = await cofgf.Documentos();
-            ViewBag.listasino = ope.LIstaSiNo();
 
-            //modelo.Opercion.Costo_Fondo = 0;
-            //modelo.Opercion.CostoSpread = 0;
-            //modelo.Opercion.vAvisoVenc = 0;
-            //modelo.Opercion.vNotificacion = 0;
-            //modelo.Opercion.Comision = 0;
-            //modelo.Opercion.ComisionMin = 0;
-            //modelo.Opercion.ComisionMax = 0;
-            //modelo.Opercion.TasaOperacion = 0;
-            //modelo.Opercion.Finaciemientoxc = 0;
-            //modelo.Opercion.Gastosope = 0;
-            //modelo.Opercion.MontoRemesa = 0;
-            //modelo.Opercion.TotalDoc = 0;
-            //modelo.Opercion.TotalNotDcto = 0;
-            //modelo.Opercion.TotalNotDeudor = 0;
-            //modelo.Opercion.Ndeudores = 0;
-            //modelo.Opercion.TotalAcum = 0;
 
-            //var estyles = await cofgf.FechaProceso();
-            //modelo.Opercion.FechaOperacion = estyles.AsDateTime();
+
+            ViewBag.tipooeracion = tipooeracion;
+            ViewBag.responsabilidad = responsabilidad;
+            ViewBag.cobranza = cobranza;
+            ViewBag.seguro = seguro;
+            ViewBag.empresas = empresas;
+            ViewBag.fechaoperacion = await cofgf.FechaProceso(); ;
+            ViewBag.codigomoneda = codigomoneda;
+            ViewBag.tiopodoc = tiopodoc;
+            ViewBag.listasino = listasinoope;
+
+         
             return View(modelo);
         }
 
-        // entrada inicial
-        //[HttpPost]
-        //public async Task<ActionResult> Index(string rut_cliente)
-        //{
-        //    var modelo = new ListCargaMasivaViewModels();
-        //    var client = new Cliente();
-
-        //    var mcliente = await client.ConsultaClienteFac(rut_cliente);
-        //    modelo.Opercion.RutCliente = rut_cliente;
-        //    modelo.Opercion.Nombre = mcliente.First().Cliente;
-
-        //    return View(modelo);
-        //}
+     
 
 
         public FileResult Descargar()
@@ -107,44 +93,42 @@ namespace WebAplicacion.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(  ListCargaMasivaViewModels model , HttpPostedFileBase archivo)
         {
-            var ope = new Operacion();
-            var cofgf = new ConfFinanciera();
-            ViewBag.tipooeracion = await LlamarServicios(1);
-            ViewBag.responsabilidad = await LlamarServicios(2);
-            ViewBag.cobranza = await LlamarServicios(3);
-            ViewBag.seguro = await LlamarServicios(4);
-            ViewBag.empresas = await cofgf.Empresas();
-            ViewBag.fechaoperacion = await cofgf.FechaProceso();
-            ViewBag.codigomoneda = await cofgf.Monedas();
-            ViewBag.tiopodoc = await cofgf.Documentos();
-            ViewBag.listasino = ope.LIstaSiNo();
-            if (archivo == null || archivo.ContentLength <= 0) return Redirect("Index");
+            if (model.Opercion.Guardar == "N")
+            {
+                ViewBag.mensajealerta = "";
+                var ope = new Operacion();
+                var cofgf = new ConfFinanciera();
+
+                ViewBag.tipooeracion = await LlamarServicios(1);
+                ViewBag.responsabilidad = await LlamarServicios(2);
+                ViewBag.cobranza = await LlamarServicios(3);
+                ViewBag.seguro = await LlamarServicios(4);
+                ViewBag.empresas = await cofgf.Empresas();
+                ViewBag.fechaoperacion = await cofgf.FechaProceso();
+                ViewBag.codigomoneda = await cofgf.Monedas();
+                ViewBag.tiopodoc = await cofgf.Documentos();
+                ViewBag.listasino = ope.LIstaSiNo();
+                var cons3 = new ConsultarDatosComunes3();
+                if (archivo == null || archivo.ContentLength <= 0) return Redirect("Index");
                 if (!(archivo.FileName.EndsWith("xls")))
+
                 {
                     ViewBag.Archivo = "Archivo no Valido";
-                    return Redirect("Index");
+                    return View(model);
                 }
-
                 var filen = (DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls").ToLower();
-                //    var path = Server.MapPath("~/Files/entrada/" + filen);
                 var path = Server.MapPath(@"~/Files/salida/" + filen);
                 archivo.SaveAs(path);
-
-                //Listadetalle = new List<DetalleOperacionesViewModel>();
                 var hoja = new LeeExcel();
-            var listadetalle = hoja.Excelnpoi(path);
-
-          
-
+                var listadetalle = hoja.Excelnpoi(path);
                 System.IO.File.Delete(path);
-               //model.Doperaciones.AddRange(listadetalle);
-               model.Doperaciones= new List<DetalleOperacionesViewModel>(); 
+                model.Doperaciones = new List<DetalleOperacionesViewModel>();
+
                 foreach (var item in listadetalle)
                 {
                     var dope = new DetalleOperacionesViewModel
                     {
                         RutDeudor = item.RutDeudor,
-                        RutDeudorClass  = "@class='classalerta'",
                         NroDocumento = item.NroDocumento,
                         Monto = item.Monto,
                         FechaEmision = item.FechaEmision,
@@ -156,18 +140,35 @@ namespace WebAplicacion.Controllers
                         Nombre = item.Nombre,
                         NroOperacio = item.NroOperacio,
                         Rutcliente = item.Rutcliente,
-                       
-                        
-                    };
+                 };
+                    
                     model.Doperaciones.Add(dope);
-                   }
-                   model.Opercion.MontoRemesa= model.Doperaciones.Sum(x => x.Monto);
-                   model.Opercion.Ndeudores = model.Doperaciones.DistinctBy(x => x.RutDeudor).Count();
-                   model.Opercion.TotalDoc = model.Doperaciones.Count;
-                   model.Opercion.TotalAcum = model.Doperaciones.Sum(x => x.Monto);
-            return View(model);
-
                 }
+
+                model.Opercion.MontoRemesa = model.Doperaciones.Sum(x => x.Monto);
+                model.Opercion.Ndeudores = model.Doperaciones.DistinctBy(x => x.RutDeudor).Count();
+                model.Opercion.TotalDoc = model.Doperaciones.Count;
+                model.Opercion.TotalAcum = model.Doperaciones.Sum(x => x.Monto);
+
+
+
+
+
+
+
+                return View(model);
+             }
+            else
+            {
+              var grabar = new Grabar();
+                if (grabar.GrabaSimulacion(model))
+                    RedirectToAction("Index");
+                 {
+                    model.Opercion.Guardar = "N";
+                    return View(model);
+                }
+            }
+        }
     
 
 

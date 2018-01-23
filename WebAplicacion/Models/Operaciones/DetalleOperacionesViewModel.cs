@@ -8,7 +8,7 @@ namespace WebAplicacion.Models.Operaciones
 {
     public class DetalleOperacionesViewModel
     {
-        [Key]
+       
         [Required]  
         [Display(Name = "Rut Deudor")]
         public string  RutDeudor { get; set; }
@@ -32,7 +32,7 @@ namespace WebAplicacion.Models.Operaciones
         public DateTime? FechaVencimeinto { get; set; }
 
         [Required]
-        public string Pais { get; set; }
+        public int? Pais { get; set; }
 
         [Required]
         public string Plaza { get; set; }

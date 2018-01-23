@@ -5,7 +5,7 @@ namespace WebAplicacion.Models
 {
     public class ClasificacionViewModel
     {
-        [Key]
+       
         public Nullable<int> id { get; set; }
 
         [Display(Name = "clasificacion") ]

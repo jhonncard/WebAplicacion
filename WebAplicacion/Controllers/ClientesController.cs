@@ -87,8 +87,8 @@ namespace WebAplicacion.Controllers
         {
            var obtener = new Cliente();
            var elcliente = await obtener.GetClienteNombre(0, nombre);
-            //  return Json( elcliente, JsonRequestBehavior.AllowGet);
-            return Json(elcliente[0].Rut
+            return Json(elcliente[0], JsonRequestBehavior.AllowGet);
+            //return Json(elcliente[0].Rut
 
 
             //new
@@ -97,14 +97,30 @@ namespace WebAplicacion.Controllers
             //    Clientes = "jhonny"
             //},
             //JsonRequestBehavior.AllowGet
-            );
+            //);
         }
 
+
+        public async Task<JsonResult> GetClientePorRut(string nombre)
+        {   var obtener = new Cliente();
+            var elcliente = await obtener.GetClienteNombre(1, nombre);
+            return Json(elcliente, JsonRequestBehavior.AllowGet);
+            //return Json(elcliente[0].Rut
+
+
+            //new
+            //{
+            //    Success = true,
+            //    Clientes = "jhonny"
+            //},
+            //JsonRequestBehavior.AllowGet
+            //);
+        }
         public async Task<JsonResult> GetClientesPorRut(string term)
         {
             var obtener = new Cliente();
             var clientes = await obtener.GetClienteNombre(1, term);
-            var lclientes = clientes.Select(item => item.Cliente).Take(int.Parse(ConfigurationManager.AppSettings["LargoLista"])).ToList();
+            var lclientes = clientes.Select(item => item.Rut).Take(int.Parse(ConfigurationManager.AppSettings["LargoLista"])).ToList();
             return Json(lclientes, JsonRequestBehavior.AllowGet);
            }
 
@@ -118,10 +134,17 @@ namespace WebAplicacion.Controllers
         }
 
 
+        public async Task<JsonResult> GetClienteDatosFinacieros(string rut, int tipodoc,int tipomond)
+        {
+            var obtener = new DatFinancieros();
+            var datfinacieros = await obtener.DatosFinancieros(rut, tipodoc,tipomond) ;
+            return Json(datfinacieros, JsonRequestBehavior.AllowGet);
+        }
 
 
 
 
+         
 
 
 

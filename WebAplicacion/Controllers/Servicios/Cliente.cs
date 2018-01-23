@@ -122,8 +122,9 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/"+id+"?param=" + nombre);
-                JObject desjson = JObject.Parse(json);
+               var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/"+id+"?param=" + nombre);
+
+               JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
                 foreach (JToken result in results)
                 {

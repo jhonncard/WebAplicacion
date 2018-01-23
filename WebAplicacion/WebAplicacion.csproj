@@ -218,7 +218,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\OperacionController.cs" />
-    <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Controllers\Reflection.cs" />
     <Compile Include="Controllers\Servicios\ConfFinanciera.cs" />
     <Compile Include="Controllers\Servicios\Cliente.cs" />
@@ -228,11 +227,9 @@
     <Compile Include="Controllers\Servicios\ConsultarDatosComunes3.cs" />
     <Compile Include="Controllers\Servicios\DatFinancieros.cs" />
     <Compile Include="Controllers\Servicios\Deudor.cs" />
+    <Compile Include="Controllers\Servicios\Graba.cs" />
     <Compile Include="Controllers\Servicios\LeeExcel.cs" />
     <Compile Include="Controllers\Servicios\CargaMasivaOperacion.cs" />
-    <Compile Include="Controllers\Servicios\ServcioComunes1.cs" />
-    <Compile Include="Controllers\Servicios\ServicioComunes2.cs" />
-    <Compile Include="Controllers\Servicios\ServicioComunes3.cs" />
     <Compile Include="Controllers\Servicios\ValidarDocumentos.cs" />
     <Compile Include="Controllers\Servicios\ValorMoneda.cs" />
     <Compile Include="Controllers\Servicios\Operacion.cs" />
@@ -274,12 +271,13 @@
     <Compile Include="Models\Json\DocumentoRelacionJson.cs" />
     <Compile Include="Models\Json\DOperacionJson.cs" />
     <Compile Include="Models\Json\Finaciero.cs" />
+    <Compile Include="Models\Json\Grabar\DetalleDocJason.cs" />
     <Compile Include="Models\Json\LogSimulacionJson.cs" />
     <Compile Include="Models\Json\PagoDocumentosJosn.cs" />
     <Compile Include="Models\MonedaViewModel.cs" />
     <Compile Include="Models\Operaciones\DetalleOperacionesViewModel.cs" />
     <Compile Include="Models\Operaciones\ListCargaMasivaViewModels.cs" />
-    <Compile Include="Models\Json\OperacionJson.cs" />
+    <Compile Include="Models\Json\Grabar\OperacionJson.cs" />
     <Compile Include="Models\Operaciones\OperacionViewModel.cs" />
     <Compile Include="Models\Bitacoras\ReporteViewModel.cs" />
     <Compile Include="Models\TipoMonedaViewModel.cs" />
@@ -428,7 +426,6 @@
     <Content Include="Views\pruebas\detalles.cshtml" />
     <Content Include="Views\pruebas\edit.cshtml" />
     <Content Include="Views\BacFactoring\Create.cshtml" />
-    <Content Include="Views\Operacion\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -119,7 +119,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-
         public async Task<int> LeerIncremento()
         {
 
@@ -141,7 +140,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-
         public async Task<int> LeerRetencion(int paramd0)
         {
             var searchResult =0;
@@ -162,7 +160,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-
         public async Task<List<Deudor>> LeerDeudor(string  paramd0)
         {
             var searchResults = new List<Deudor>();
@@ -183,7 +180,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResults;
 
         }
-
         public async Task<List<ClienteEntidad>> LeerManCliente(string paramd0)
         {
 
@@ -206,8 +202,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResults;
 
         }
-
-
         public async Task<List<OperacionCliente>> UltimasOpClinte(string  paramd0)
         {
 
@@ -251,7 +245,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-
         public async Task<DatosMdac> DeudoresOperacion()
         {
 
@@ -275,7 +268,6 @@ namespace WebAplicacion.Controllers.Servicios
             }
             return searchResults;
       }
-
         public async Task<List<DatosRepresentantes>> ReImpresionrepResentantes(string paramd0)
         {
 
@@ -298,7 +290,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResults;
 
         }
-
         public async Task<List<DatosRepresentantes>> IngresoRepresentatesSimulacion(string paramd0)
         {
 
@@ -321,7 +312,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResults;
 
         }
-
         public async Task<List<DatosRepresentantes>> CargaRepresentateContratoMonex(string paramd0)
         {
 
@@ -344,7 +334,6 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResults;
 
         }
-        
         public async Task<string> VerificaProcesoLimites(string paramd0 )
         {
 
@@ -387,8 +376,49 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-       
 
+        public async Task<string> ValorResposabilidad(int paramd0)
+        {
 
+            var searchResult = "";
+            try
+            {
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync(" http://10.250.13.245:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes1/18?param1 = " + paramd0);
+                var desjson = JObject.Parse(json);
+                
+                searchResult = (string)desjson["VerificaResponsabilidad"];
+            }
+            catch (Exception)
+            {
+                ;
+            }
+
+            return searchResult;
+
+        }
+
+        public async Task<decimal> IvaParametro()
+        {
+
+            decimal searchResult = 0;
+            try
+            {
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
+                _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
+                var json = await _cliente.GetStringAsync(" http://10.250.13.245:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes1/19");
+                var desjson = JObject.Parse(json);
+
+                searchResult = (decimal)desjson["Iva_Parametro"];
+            }
+            catch (Exception)
+            {
+                ;
+            }
+
+            return searchResult;
+
+        }
     }
 }

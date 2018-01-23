@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using iTextSharp.text.pdf;
 using Microsoft.Ajax.Utilities;
 using WebAplicacion.Models.Operaciones;
 using WebAplicacion.util;
@@ -27,39 +28,54 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 if (modelo.Opercion.TipoDocumento == 1 || modelo.Opercion.TipoDocumento == 4)
                 {
-                    if (!condat3
-                        .VerificaFactura(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
-                            modelo.Opercion.TipoDocumento).Result
-                        .Equals(item.NroDocumento.GetValueOrDefault().ToString()))
+                    if (int.Parse(condat3.VerificaFactura(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
+                            modelo.Opercion.TipoDocumento).Result)
+                        != 0)
                         item.NroDocumentoClass = marcar;
+                    item.MensajeNotificaciones += (" Nro.Documento ya registrado en la base de datos " +
+                                                  item.NroDocumento + ",");
+                  
                 }
                 else
                 {
-                    if (!condat3
-                        .VerificaDocumento(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
-                            modelo.Opercion.TipoDocumento).Result
-                        .Equals(item.NroDocumento.GetValueOrDefault().ToString()))
+                    if (!condat3.VerificaDocumento(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
+                        modelo.Opercion.TipoDocumento).Result.Equals("s"))
                         item.NroDocumentoClass = marcar;
+                    item.MensajeNotificaciones += (" Nro.Documento ya registrado en la base de datos " +
+                                                  item.NroDocumento + ",");
+                  
                 }
+            }
+          //  Util.RegistrosRepetidos(modelo.Doperaciones);
 
-            //if ( item.RutDeudor.IsNullOrWhiteSpace() ) 
-                if (condat3.VerificaFactura(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),modelo.Opercion.TipoDocumento).Result ==
-                    "") return repuesta;
-                
-                
+            if (int.Parse(modelo.Opercion.Responsabilidad) != 0)
+            {
+            //    var valor de => 
+            //    if ( valor == "C")
+            //    {
+            //          GrabarSimilacion(modelo)
 
-
-
-
-
-
-
-
-
-
-
+            //    }
+            //    else
+            //    {
+            //        ValidaLimiteduedores(modelo)
+            //    }
 
             }
+
+
+
+//           
+
+
+
+
+
+
+
+
+
+
 
             repuesta = true;
 

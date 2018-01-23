@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Org.BouncyCastle.Crypto.Engines;
 
 
 namespace WebAplicacion.Models.Operaciones
@@ -27,33 +28,37 @@ namespace WebAplicacion.Models.Operaciones
 
         [Required]
         [Display(Name = "Tipo de Operación")]
+        [Range(1,100, ErrorMessage = "selecciones una opción")]
         public int  TipoOperacion { get; set; }
 
         [Required]
+        [Range(1, 100, ErrorMessage = "selecciones una opción")]
         public string Cobranza { get; set; }
 
        // [Required]
         [Display(Name = "Costo Spread")]
-       
-        public decimal? CostoSpread  { get; set; }
+       public decimal? CostoSpread  { get; set; }
 
         [Required]
+        [Range(1, 100, ErrorMessage = "selecciones una opción")]
         public string Responsabilidad { get; set; }
 
         [Required]
         [Display(Name = "Seguro")]
+        [Range(1, 100, ErrorMessage = "selecciones una opción")]
         public string Seguro { get; set; }
 
-        //[Required]
-        //[DataType(DataType.Date)]
-        //[Range(typeof(DateTime), "01/01/1900", "01/01/2099",
-        //ErrorMessage = "Fechas aceptadas para campo {0} entre {1} y {2}")]
+        [Required]
+        [DataType(DataType.Date)]
+        [Range(typeof(DateTime), "01/01/1900", "01/01/2099",
+        ErrorMessage = "Fechas aceptadas para campo {0} entre {1} y {2}")]
         [Display(Name = "Fecha Operación")]
         //[DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? FechaOperacion { get; set; }
 
         [Required]
         [Display(Name = "Codigo Moneda")]
+        [Range(1, 100, ErrorMessage = "selecciones una opción")]
         public string CodigoMoneda { get; set; }
 
         [Required]
@@ -66,6 +71,7 @@ namespace WebAplicacion.Models.Operaciones
 
         [Required]
         [Display(Name = "Tipo Documento")]
+        [Range(1, 100, ErrorMessage = "selecciones una opción")]
         public int  TipoDocumento { get; set; }
 
         [Required]
@@ -97,11 +103,11 @@ namespace WebAplicacion.Models.Operaciones
         //[DisplayFormat(ApplyFormatInEditMode = true)]
         public decimal?  TasaOperacion { get; set; }
 
-        //[Required]
-        [Display(Name = "% Finaciemiento")]
+        [Required]
+        [Display(Name = "% Finaciamiento")]
         [Range(0, 100, ErrorMessage = "El valor de {0} debe estar entre {1} y {2}")]
         //[DisplayFormat(ApplyFormatInEditMode = true)]
-        public decimal? Finaciemientoxc { get; set; }
+        public decimal? Financiamiento { get; set; }
 
         //[Required]
         [Display(Name = "Gtos Oper.")]
@@ -114,7 +120,7 @@ namespace WebAplicacion.Models.Operaciones
         public decimal? MontoRemesa { get; set; }
 
         //[Required]
-        [Display(Name = "Aument Art 84")]
+        [Display(Name = "Aumento Art 84")]
         public int AumentArt84 { get; set; }
 
       
@@ -141,5 +147,10 @@ namespace WebAplicacion.Models.Operaciones
        // [DisplayFormat(ApplyFormatInEditMode = true)]
         public decimal? TotalNotDeudor { get; set; }
 
-     }
+        [ScaffoldColumn(false)]
+        public string Guardar { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string Mensajes { get; set; }
+    }
 }
