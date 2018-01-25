@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using NPOI.OpenXmlFormats.Dml.Diagram;
 using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.SS.Formula.Functions;
+using WebAplicacion.Models.entities;
 using WebAplicacion.Models.Json;
 using WebAplicacion.Models.Json.Grabar;
 using WebAplicacion.Models.Operaciones;

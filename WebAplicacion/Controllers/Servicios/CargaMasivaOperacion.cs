@@ -28,7 +28,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 if (modelo.Opercion.TipoDocumento == 1 || modelo.Opercion.TipoDocumento == 4)
                 {
-                    if (int.Parse(condat3.VerificaFactura(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
+                    if (int.Parse(condat3.VerificaFactura(item.RutDeudor, decimal.Parse(item.NroDocumento),
                             modelo.Opercion.TipoDocumento).Result)
                         != 0)
                         item.NroDocumentoClass = marcar;
@@ -38,7 +38,7 @@ namespace WebAplicacion.Controllers.Servicios
                 }
                 else
                 {
-                    if (!condat3.VerificaDocumento(item.RutDeudor, item.NroDocumento.GetValueOrDefault(),
+                    if (!condat3.VerificaDocumento(item.RutDeudor, decimal.Parse(item.NroDocumento),
                         modelo.Opercion.TipoDocumento).Result.Equals("s"))
                         item.NroDocumentoClass = marcar;
                     item.MensajeNotificaciones += (" Nro.Documento ya registrado en la base de datos " +

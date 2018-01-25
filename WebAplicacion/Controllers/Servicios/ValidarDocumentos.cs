@@ -5,8 +5,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using iTextSharp.text.pdf.crypto;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
 using NPOI.HPSF;
+using NPOI.HSSF.Record;
 using Remotion.Logging;
 using WebAplicacion.Models.Dto;
 using WebAplicacion.Models.entities;
@@ -40,7 +43,7 @@ namespace WebAplicacion.Controllers.Servicios
                    Nombre =item.Nombre,
                    CodPais =  item.Pais.Value,
                    CodCiudad = int.Parse(item.Plaza),
-                   NroDcto = item.NroDocumento.Value,
+                   NroDcto = item.NroDocumento,
                    TipoDcto = model.Opercion .TipoDocumento
                };
                 
@@ -64,13 +67,130 @@ namespace WebAplicacion.Controllers.Servicios
 
                  // validar verificar que el numero de documento sea un numero y que no este repetido * por validar 
                  // verificar que el documento no exista en la base de datos y que sea menor o igual a 99999999999999999999 
-               if (item.NroDocumento.Value > 99999999999999999999)
+               if (item.NroDocumento.Length > 20)
                {
                    item.RutDeudorClass = marca;
                    item.RutDeudorNoti = "Nro de Documnto invalido debe ser menor a 21 digitos";
-                }
+               }
+               if (item.NroDocumento == "")
+               {
+                   item.RutDeudorClass = marca;
+                   item.RutDeudorNoti = "Nro de DocumntoNo puede estar en blanco ";
+               }
+               else
+               {
+                   ulong i = 0;
+                   if (ulong.TryParse(item.NroDocumento, out i))
+                   {
+                       item.NroDocumentoClass = marca;
+                       item.NroDocumentoNoti = $"Nro de DocumntoNo{item.NroDocumento} Invalido ";
+                   }
+               }
+               var p = 0;
+               if (int.TryParse(item.Pais.ToString(), out p))
+               {
+                   item.PaisClass = marca;
+                   item.PaisNoti = $"El pais debe ser numerico y no puede ser 0";
             
+               else if (item.Pais.ToString().IsNullOrWhiteSpace())
+                   {
+                       item.PaisClass =  marca;
+                       item.PaisNoti += $" El pais no puede estar en blanco";
+                   }
+               if (item.Plaza.IsNullOrWhiteSpace() )
+                    if (item.plaza)
+                foreach (var ivg in varGraba)
+               {
 
+                   switch (ivg.Id)
+                   {
+                        case 1:
+                            if (ivg.Valor1=="S")
+                        {
+                            item.RutDeudorClass = marca;
+                           item.RutDeudorNoti = $"Rut {item.RutDeudor} Bloqueadov para el cliente";
+                        }
+                            break;
+                        case 2:
+                             if (ivg.Valor1 == "S")
+                            {
+                                item.RutDeudorClass = marca;
+                                item.RutDeudorNoti = item.RutDeudorNoti + " " + $"Rut {item.RutDeudor} Bloqueadov";
+                            }
+
+
+                              break;
+                            
+                        case 3:
+                           
+                           if (ivg.Valor1 == "S")
+                            {
+                                item.NombreClass = marca;
+                                item.NombreNoti = $" El nombre {item.Nombre} no corresponde al rut";
+                            }
+                            break;
+
+
+                        case 4:
+
+                            if (ivg.Valor1 == "S")
+                                {
+                                    item.NroDocumento = marca;
+                                    item.NroDocumento = $" Docto. {item.NroDocumento} existe en Base de Datos";
+                                }
+
+                            break;
+
+                        case 5:
+                            if (ivg.Valor1 == "0")
+                            {
+                                item.NombreClass = marca;
+                                item.NombreNoti = $"Pa�s {item.Pais} No Existe";
+                            }
+
+                            break;
+                        case 6:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            break;
+                       case 7:
+
+                           if (!ivg.Valor1.Equals("0"))
+                               
+                               {
+                                   item.NroDocumento = marca;
+                                   item.NroDocumento = $" Docto. {item.NroDocumento} existe en Base de Datos";
+                               }
+
+                           break;
+                    }
+
+
+
+
+
+
+
+
+                   
+               }
 
 
 
@@ -134,7 +254,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         private async Task<List<SelectListItem>> LlamarServicios(string hijo)
         {
-            var searchResultscf = new List<datoscofigJson>();
+            var searchResultscf = new List<DatoscofigJson>();
             var searchResults = new List<SelectListItem>();
 
             try
@@ -146,21 +266,21 @@ namespace WebAplicacion.Controllers.Servicios
                 IList<JToken> results = desjson["dtoResponseSetResultados"][hijo].Children().ToList();
                 if (hijo == "FechaProceso")
                 {
-                    var items = new datoscofigJson();
+                    var items = new DatoscofigJson();
                     items.FechaProceso = (string)desjson["dtoResponseSetResultados"]["FechaProceso"];
                     items.Id = "1";
                     searchResultscf.Add(items);
                 }
                 foreach (var result in results)
                 {
-                    var searchResult = result.ToObject<datoscofigJson>();
+                    var searchResult = result.ToObject<DatoscofigJson>();
                     searchResultscf.Add(searchResult);
                 }
 
             }
             catch (Exception)
             {
-                var searchResult = new datoscofigJson();
+                var searchResult = new DatoscofigJson();
                 searchResultscf.Add(searchResult);
 
             }

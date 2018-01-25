@@ -43,7 +43,7 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-        public async Task<string> VerificaFactura(string paramd0, ulong paramd1, int paramd2)
+        public async Task<string> VerificaFactura(string paramd0, decimal paramd1, int paramd2)
         {
 
            var searchResult = "" ;
@@ -65,7 +65,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         }
 
-        public async Task<string> VerificaDocumento( string paramd0, ulong paramd1, int paramd2)
+        public async Task<string> VerificaDocumento( string paramd0, decimal paramd1, int paramd2)
         {
 
             var searchResult = "";

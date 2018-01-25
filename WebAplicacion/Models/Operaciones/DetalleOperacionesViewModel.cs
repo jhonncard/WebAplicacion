@@ -16,11 +16,10 @@ namespace WebAplicacion.Models.Operaciones
 
         [Required]
         [Display(Name = "N° Documento")]
-        [Range(1,999999999999999999)]
-        public ulong? NroDocumento { get; set; }
+         public string NroDocumento { get; set; }
 
         [Required]
-        [Range(1, 999999999999)]
+        [Range(1, 9999999999999999)]
         public decimal? Monto { get; set; }
 
         [Required]

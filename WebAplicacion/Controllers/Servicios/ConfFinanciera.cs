@@ -38,7 +38,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         private async Task<List<SelectListItem>> LlamarServicios(string hijo)
         {
-            var searchResultscf = new List<datoscofigJson>();
+            var searchResultscf = new List<DatoscofigJson>();
             var searchResults = new List<SelectListItem>();
             
             try
@@ -50,21 +50,21 @@ namespace WebAplicacion.Controllers.Servicios
                 IList<JToken> results = desjson["dtoResponseSetResultados"][hijo].Children().ToList();
                 if (hijo == "FechaProceso")
                 {
-                   var items = new datoscofigJson();
+                   var items = new DatoscofigJson();
                     items.FechaProceso = (string)desjson["dtoResponseSetResultados"]["FechaProceso"];
                     items.Id = "1";
                     searchResultscf.Add(items);
                 }
                 foreach (var result in results)
                 {
-                    var searchResult = result.ToObject<datoscofigJson>();
+                    var searchResult = result.ToObject<DatoscofigJson>();
                     searchResultscf.Add(searchResult);
                 }
 
             }
             catch (Exception )
             {
-                var searchResult = new datoscofigJson();
+                var searchResult = new DatoscofigJson();
                 searchResultscf.Add(searchResult);
 
             }

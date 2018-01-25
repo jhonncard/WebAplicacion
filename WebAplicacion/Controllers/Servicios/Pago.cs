@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using WebAplicacion.Models.entities;
 using WebAplicacion.Models.Json;
 
 

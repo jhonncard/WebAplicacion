@@ -225,6 +225,7 @@
     <Compile Include="Controllers\Servicios\ConsultarDatosComunes1.cs" />
     <Compile Include="Controllers\Servicios\ConsultarDatosComunes2.cs" />
     <Compile Include="Controllers\Servicios\ConsultarDatosComunes3.cs" />
+    <Compile Include="Controllers\Servicios\ConsultasArt84.cs" />
     <Compile Include="Controllers\Servicios\DatFinancieros.cs" />
     <Compile Include="Controllers\Servicios\Deudor.cs" />
     <Compile Include="Controllers\Servicios\Graba.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Models\entities\Politicas.cs" />
     <Compile Include="Models\entities\SaldosCliente.cs" />
     <Compile Include="Models\entities\ValidaGrabacion.cs" />
+    <Compile Include="Models\entities\VerificaLimites84.cs" />
     <Compile Include="Models\entities\VerificaLineaCredito.cs" />
     <Compile Include="Models\Json\ActualizarAnticipoJson.cs" />
     <Compile Include="Models\Json\ActualizardecuentoJson.cs" />
@@ -268,7 +270,7 @@
     <Compile Include="Models\Deudores\MantDuedoresViewModel.cs" />
     <Compile Include="Models\Dto\MantMduedoresDto.cs" />
     <Compile Include="Models\entities\Datos.cs" />
-    <Compile Include="Models\Json\datoscofigJson.cs" />
+    <Compile Include="Models\Json\DatoscofigJson.cs" />
     <Compile Include="Models\Json\DeudorJson.cs" />
     <Compile Include="Models\Json\DocumentoRelacionJson.cs" />
     <Compile Include="Models\Json\DOperacionJson.cs" />
@@ -277,6 +279,7 @@
     <Compile Include="Models\Json\LogSimulacionJson.cs" />
     <Compile Include="Models\Json\PagoDocumentosJosn.cs" />
     <Compile Include="Models\Json\Grabar\VIngresoSimulacionJson.cs" />
+    <Compile Include="Models\Json\VerificaLimites84Jason.cs" />
     <Compile Include="Models\MonedaViewModel.cs" />
     <Compile Include="Models\Operaciones\DetalleOperacionesViewModel.cs" />
     <Compile Include="Models\Operaciones\ListCargaMasivaViewModels.cs" />

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
-
-namespace WebAplicacion.Models.Json
+﻿namespace WebAplicacion.Models.entities
 {
     public class Datos
     {

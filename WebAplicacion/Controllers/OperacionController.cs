@@ -16,6 +16,7 @@ using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
 using NPOI.OpenXmlFormats.Wordprocessing;
 using WebAplicacion.Controllers.Servicios;
+using WebAplicacion.Models.entities;
 using WebAplicacion.Models.Json;
 using WebAplicacion.Models.Operaciones;
 

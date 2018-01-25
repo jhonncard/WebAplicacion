@@ -12,7 +12,7 @@ namespace WebAplicacion.Models.Json
         public string Nombre { get; set; }
         public int CodPais { get; set; }
         public int CodCiudad { get; set; }
-        public ulong NroDcto { get; set; }
+        public string NroDcto { get; set; }
         public int TipoDcto { get; set; }
 
     }

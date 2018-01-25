@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAplicacion.Models.Json
 {
-    public class datoscofigJson
+    public class DatoscofigJson
     {
         public string CodigoDocumento { get; set; }
         public string GlosaDocumento { get; set; }
