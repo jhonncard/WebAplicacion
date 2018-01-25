@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebAplicacion.Models.Dto;
@@ -15,8 +16,8 @@ namespace WebAplicacion.Models.Operaciones
 
         [Required]
         [Display(Name = "N° Documento")]
-        [Range(1,999999999999)]
-        public int? NroDocumento { get; set; }
+        [Range(1,999999999999999999)]
+        public ulong? NroDocumento { get; set; }
 
         [Required]
         [Range(1, 999999999999)]
@@ -90,6 +91,42 @@ namespace WebAplicacion.Models.Operaciones
 
         [ScaffoldColumn(false)]
         public string DireccionClass { get; set; }
-      
+
+        ///////////////////////////////////////////////////////////
+
+        public string RutDeudorNoti { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string NroDocumentoNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string MontoNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string FechaEmisionNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string FechaVencimeintoNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string PaisNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string PlazaNoti { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string CiudadNoti { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public string NombreNoti { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string DireccionNoti { get; set; }
     }
 }

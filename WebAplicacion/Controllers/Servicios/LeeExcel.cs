@@ -51,7 +51,7 @@ namespace WebAplicacion.Controllers.Servicios
                             {
 
                                 RutDeudor = sheet.GetRow(row).GetCell(0).StringCellValue,
-                                NroDocumento = int.Parse(sheet.GetRow(row).GetCell(1).NumericCellValue.ToString()),
+                                NroDocumento = ulong.Parse(sheet.GetRow(row).GetCell(1).NumericCellValue.ToString()),
                                 Monto =decimal.Parse( sheet.GetRow(row).GetCell(2).NumericCellValue.ToString()),
                                 FechaEmision = Convert.ToDateTime(sheet.GetRow(row).GetCell(3).DateCellValue.ToString()),
                                 FechaVencimeinto = Convert.ToDateTime(sheet.GetRow(row).GetCell(4).DateCellValue.ToString()),
@@ -65,9 +65,9 @@ namespace WebAplicacion.Controllers.Servicios
                         list.Add(detalle);
 
                 }
-                    catch (Exception )
+                    catch (Exception ex )
                     {
-                       ;
+                       Console.Write(ex);
                     }
 
                    

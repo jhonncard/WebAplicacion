@@ -58,7 +58,7 @@ namespace WebAplicacion.Controllers.Servicios
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                 ConfigurationManager.AppSettings["Token-Authorization"]);
-            var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/Helpers/ConsultarValorMoneda/"+codmoneda +"? fecha="+fecha.ToString());
+            var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarValorMoneda/"+codmoneda +"? fecha="+fecha.ToString());
             var desjson = JObject.Parse(json);
           return (decimal)desjson["Valor"] ;
         }
@@ -71,7 +71,7 @@ namespace WebAplicacion.Controllers.Servicios
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                 ConfigurationManager.AppSettings["Token-Authorization"]);
-            var json = await cliente.GetStringAsync(" http://10.250.13.245:8080/WS_FactoringCargaMasiva/Helpers/ConsultarMedioDePago/"+ nrodcto+"?rut="+rut+"&moneda=" + idmoneda );
+            var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarMedioDePago/"+ nrodcto+"?rut="+rut+"&moneda=" + idmoneda );
             var desjson = JObject.Parse(json);
             mpago.GLosa =(string) desjson["dtoResponseSetResultados"]["Glosa"];
             mpago.Valor = (int)desjson["dtoResponseSetResultados"]["Valor"];
@@ -107,7 +107,7 @@ namespace WebAplicacion.Controllers.Servicios
                
                cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", (modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/GrabarCondicionesComerciales", (modelo));
                 resulstado = true;
             }
             catch (Exception )
@@ -141,7 +141,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/GrabarDocumentoRelacion/", MapperDocumentoRelacion(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/GrabarDocumentoRelacion/", MapperDocumentoRelacion(modelo));
                 resulstado = true;
             }
             catch (Exception)
@@ -159,7 +159,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ActualizarAnticipoSimulacion/", MapperActualizarAnticipo(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/ActualizarAnticipoSimulacion/", MapperActualizarAnticipo(modelo));
                 resulstado = true;
             }
             catch (Exception)
@@ -177,7 +177,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/GrabarPagoDocumentos/", MapperPagoDocumentos(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/GrabarPagoDocumentos/", MapperPagoDocumentos(modelo));
                 resulstado = true;
             }
             catch (Exception)
@@ -195,7 +195,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ActualizarDescuento/", MapperActualizarDescuento(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/ActualizarDescuento/", MapperActualizarDescuento(modelo));
                 resulstado = true;
             }
             catch (Exception)
@@ -212,7 +212,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/GrabarDeudorSimulacion/	", MapperDeudor(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/GrabarDeudorSimulacion/	", MapperDeudor(modelo));
                 resulstado = true;
             }
             catch (Exception)
@@ -230,7 +230,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/GrabarLogSimulacion/	", MapperLogSimulacion(modelo));
+                var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/GrabarLogSimulacion/	", MapperLogSimulacion(modelo));
                 resulstado = true;
             }
             catch (Exception)

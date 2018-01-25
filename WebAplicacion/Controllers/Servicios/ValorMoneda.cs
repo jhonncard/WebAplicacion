@@ -33,7 +33,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-AuthorizationOPE"]);
-                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ConsultarDatosFinancieros/" + rut + "?doc=" + tipodoc + "&moneda=" + moneda);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/ConsultarDatosFinancieros/" + rut + "?doc=" + tipodoc + "&moneda=" + moneda);
 
                 var desjson = JObject.Parse(json);
 

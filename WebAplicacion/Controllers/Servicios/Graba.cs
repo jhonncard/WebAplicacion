@@ -5,6 +5,7 @@ using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using NPOI.OpenXmlFormats.Dml.Diagram;
 using NPOI.OpenXmlFormats.Wordprocessing;
+using NPOI.SS.Formula.Functions;
 using WebAplicacion.Models.Json;
 using WebAplicacion.Models.Json.Grabar;
 using WebAplicacion.Models.Operaciones;
@@ -141,6 +142,7 @@ namespace WebAplicacion.Controllers.Servicios
                                      (modelo.Comision > modelo.ComisionMax ? modelo.ComisionMax/Moneda(modelo.CodigoMoneda,modelo.FechaOperacion.Value)
                                     :(modelo.Comision < modelo.ComisionMin ? modelo.ComisionMin:modelo.Comision)):modelo.Comision);
             dopJson.MontoIVA = detalle.Monto * Iva();
+
             dopJson.Remesada = "F";
             dopJson.FechaPag = fechapago(Retension(detalle.Pais.Value), detalle.FechaVencimeinto.ToString());
             dopJson.MontoI = (modelo.CodigoMoneda != "999" || modelo.CodigoMoneda != "998")?
@@ -149,6 +151,7 @@ namespace WebAplicacion.Controllers.Servicios
 
             var plazo = Util.Diffechas( modelo.FechaOperacion.Value, DateTime.Parse(dopJson.FechaPag));
             var basec = modelo.CodigoMoneda.Equals("999")? 3000:36000;
+
             var diasEmision = Util.Diffechas( detalle.FechaEmision.Value, modelo.FechaOperacion.Value );
             var porc_envejeci = (diasEmision * 100) / plazo;
             var plazo_emi = financieros.Result.PlazoEmision;
@@ -156,6 +159,9 @@ namespace WebAplicacion.Controllers.Servicios
                   dopJson.NumReempl = plazo_emi == 0 ? 0 : 1;
              else
                 dopJson.NumReempl = 0;
+
+
+
             if (financieros.Result.PlazoMin == 0 && financieros.Result.PlazoMin == 0)
                 dopJson.RePlazo = "F";
             else
@@ -168,27 +174,25 @@ namespace WebAplicacion.Controllers.Servicios
                 {
                     dopJson.RePlazo = financieros.Result.PlazoEmision < financieros.Result.PlazoMin ? "T" : "F";
                 }
-                
-                Else
-                    If plazo < plazo_minimo_docto Or plazo > plazo_maximo_docto Then
-                    sql = sql & "'" & "T" & "'"
-                Else
-                    sql = sql & "'" & "F" & "'"
-                End If
-                End If
-                End If
+                else
+                {
+                    dopJson.RePlazo= (financieros.Result.PlazoEmision < financieros.Result.PlazoMin ||
+                        financieros.Result.PlazoEmision > financieros.Result.PlazoMax)? dopJson.RePlazo = "T": dopJson.RePlazo = "F";
+                    
+                }
+               
             }
 
-
-
-
+            decimal plazo_op = 0;
+            if (financieros.Result.PlazoEmision > plazo_op)
+                plazo_op = financieros.Result.PlazoEmision.Value;
 
             dopJson.FechaReemp = "";
             //------
             dopJson.Correlativo2 = 0;
             dopJson.NumReempl = 0;
             dopJson.Gastos = 0;
-            dopJson.RePlazo = 0;
+            dopJson.RePlazo = "";
     
     
             
@@ -329,7 +333,7 @@ namespace WebAplicacion.Controllers.Servicios
             return fech1.ToString("dd/MM/yyyy");
         }
 
-        private static decimal Iva()
+        public  static decimal Iva()
         {
             decimal iva = 0;
             var consul1 = new ConsultarDatosComunes1();        
@@ -338,7 +342,7 @@ namespace WebAplicacion.Controllers.Servicios
             
         }
 
-        private static int Retension(int pais )
+        public  static int Retension(int pais )
         {
             var reten = 0;
             var consul1 = new ConsultarDatosComunes1();

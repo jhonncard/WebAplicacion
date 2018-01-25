@@ -1,7 +1,8 @@
 ﻿    using WebAplicacion.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+    using System.Configuration;
+    using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -67,7 +68,7 @@ namespace WebAplicacion.Controllers
                 var cliente = new HttpClient();
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarLogFactoring/" + buscar);
+                var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarLogFactoring/" + buscar);
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultaLogFactoring"].Children().ToList();
 

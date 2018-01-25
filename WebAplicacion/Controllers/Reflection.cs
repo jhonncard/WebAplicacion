@@ -66,7 +66,7 @@ namespace WebAplicacion.Controllers
                 var cliente = new HttpClient();
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var response = await cliente.PostAsJsonAsync ( " http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarLogFactoring", log);
+                var response = await cliente.PostAsJsonAsync ( ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/GrabarLogFactoring", log);
 
               
 

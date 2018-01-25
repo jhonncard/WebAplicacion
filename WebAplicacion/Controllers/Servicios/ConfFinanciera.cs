@@ -45,7 +45,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-AuthorizationOPE"]);
-                var json = await _cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringCargaMasiva/ConsultarConfigFinanciera/" );
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/ConsultarConfigFinanciera/" );
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"][hijo].Children().ToList();
                 if (hijo == "FechaProceso")

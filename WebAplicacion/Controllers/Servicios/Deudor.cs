@@ -35,7 +35,7 @@ namespace WebAplicacion.Controllers.Servicios
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                     ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync( "http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudores/" + paramid + "?param=" + id);
+                var json = await client.GetStringAsync( ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarDeudores/" + paramid + "?param=" + id);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children()
                     .ToList();
@@ -70,7 +70,7 @@ namespace WebAplicacion.Controllers.Servicios
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                     ConfigurationManager.AppSettings["Token-Authorization"]);
                 var json = await client.GetStringAsync(
-                    "http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudoresFactoring/" + rut);
+                    ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarDeudoresFactoring/" + rut);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children()
                     .ToList();
@@ -100,7 +100,7 @@ namespace WebAplicacion.Controllers.Servicios
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                     ConfigurationManager.AppSettings["Token-Authorization"]);
-                await client.PostAsJsonAsync ("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarDeudoresFactoring/", MapperMantMduedoresDto(modelo));
+                await client.PostAsJsonAsync (ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/GrabarDeudoresFactoring/", MapperMantMduedoresDto(modelo));
 
                
             }
@@ -114,7 +114,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarDeudores/"+param+"?param=" + nombre);
+                var json = await client.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarDeudores/"+param+"?param=" + nombre);
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
                 foreach (JToken result in results)

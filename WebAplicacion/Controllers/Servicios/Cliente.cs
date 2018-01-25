@@ -44,7 +44,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/" + paramid + "?param=" + id);
+                var json = await client.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarClienteBac/" + paramid + "?param=" + id);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
                 foreach (var result in results)
@@ -79,7 +79,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteFactoring/" + rut);
+                var json = await client.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarClienteFactoring/" + rut);
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["clientedto"].Children().ToList();
                 foreach (JToken result in results)
@@ -107,7 +107,7 @@ namespace WebAplicacion.Controllers.Servicios
             if (await reflex.Comprar(clienteold, _cliente, "user", "condiciones")) 
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-             await client.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarClienteFactoring/", mapper(_cliente));
+             await client.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/GrabarClienteFactoring/", mapper(_cliente));
         }
 
 
@@ -122,7 +122,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-               var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarClienteBac/"+id+"?param=" + nombre);
+               var json = await client.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarClienteBac/"+id+"?param=" + nombre);
 
                JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoClienteBAC"].Children().ToList();
@@ -176,7 +176,7 @@ namespace WebAplicacion.Controllers.Servicios
            {
                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                client.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-               var json = await client.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarLimitesDeudor");
+               var json = await client.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarLimitesDeudor");
                var desjson = JObject.Parse(json);
                IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultarLimitesDeudor"].Children().ToList();
                searchResults.AddRange(results.Select(result => result.ToObject<Politicas>()));

@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
+using NPOI.OpenXmlFormats.Wordprocessing;
 using WebAplicacion.Controllers.Servicios;
 using WebAplicacion.Models.Json;
 using WebAplicacion.Models.Operaciones;
@@ -91,9 +92,9 @@ namespace WebAplicacion.Controllers
 
         //  guardardo
         [HttpPost]
-        public async Task<ActionResult> Index(  ListCargaMasivaViewModels model , HttpPostedFileBase archivo)
+        public async Task<ActionResult> Index(  ListCargaMasivaViewModels model , HttpPostedFileBase archivo, string valorExtra)
         {
-            if (model.Opercion.Guardar == "N")
+            if (valorExtra == "N" )
             {
                 ViewBag.mensajealerta = "";
                 var ope = new Operacion();
@@ -144,7 +145,7 @@ namespace WebAplicacion.Controllers
                     
                     model.Doperaciones.Add(dope);
                 }
-
+                //ValidarDocumentos(model.Doperaciones);
                 model.Opercion.MontoRemesa = model.Doperaciones.Sum(x => x.Monto);
                 model.Opercion.Ndeudores = model.Doperaciones.DistinctBy(x => x.RutDeudor).Count();
                 model.Opercion.TotalDoc = model.Doperaciones.Count;
@@ -160,16 +161,16 @@ namespace WebAplicacion.Controllers
              }
             else
             {
-              var grabar = new Grabar();
-                if (grabar.GrabaSimulacion(model))
-                    RedirectToAction("Index");
-                 {
-                    model.Opercion.Guardar = "N";
-                    return View(model);
-                }
+                //var grabar = new Grabar();
+                //if (grabar.GrabaSimulacion(model))
+                //    RedirectToAction("Index");
+                //{
+                //    model.Opercion.Guardar = "N";
+                return View(model);
+                //}
             }
         }
-    
+
 
 
 
@@ -202,7 +203,7 @@ namespace WebAplicacion.Controllers
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization",
                     ConfigurationManager.AppSettings["Token-AuthorizationOPE"]);
                 var json = await cliente.GetStringAsync(
-                    "http://10.250.13.245:8080/WS_FactoringCargaMasiva/ConsultarDatosOperacion/" + tipo);
+                    ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/ConsultarDatosOperacion/" + tipo);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoDatosOperacion"].Children().ToList();
                 foreach (var result in results)

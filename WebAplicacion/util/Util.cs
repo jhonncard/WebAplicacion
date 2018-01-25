@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using WebAplicacion.Models.Operaciones;
 
 namespace WebAplicacion.util
 {
     public static class Util
     {
-        #region rut
+        #region Valida Rut
         
         private static string CalcularDigitoVerificador(string  numero)
         {
@@ -47,6 +50,45 @@ namespace WebAplicacion.util
         }
         #endregion
 
+        #region Formatear Rut
+        public static String formatearRut(String rut)
+        {
+            if (rut.Length == 9 || rut.Length == 8 || rut.Length == 2)
+            {
+                String[] FRut = new String[4];
+
+                if (rut.Length == 9)
+                {
+                    FRut[0] = rut.Substring(0, 2);
+                    FRut[1] = rut.Substring(2, 3);
+                    FRut[2] = rut.Substring(5, 3);
+                    FRut[3] = rut.Substring(8, 1);
+                }
+
+                if (rut.Length == 8)
+                {
+                    FRut[0] = rut.Substring(0, 1);
+                    FRut[1] = rut.Substring(1, 3);
+                    FRut[2] = rut.Substring(4, 3);
+                    FRut[3] = rut.Substring(7, 1);
+                }
+
+                if (rut.Length == 2)
+                {
+                    FRut[0] = rut.Substring(0, 1);
+                    FRut[1] = rut.Substring(1, 1);
+
+                    rut = (FRut[0] + "-" + FRut[1]);
+
+                    return rut;
+                }
+
+                rut = (FRut[0] + "." + FRut[1] + "." + FRut[2] + "-" + FRut[3]);
+            }
+
+            return rut;
+        }
+        #endregion  
 
         #region Validaciones de fechas
 
@@ -59,27 +101,38 @@ namespace WebAplicacion.util
         }
         #endregion
     
+        #region valorduplicadoLista no terminado
 
-        #region valorduplicadoLista
-
-        public static string RegistrosRepetidos(object obj1)
+        public static string RegistrosRepetidos(List<DetalleOperacionesViewModel> detalle, DetalleOperacionesViewModel reg )
         {
           var inf = "";
-          var tOb1 = obj1.GetType();
-        
-           
+
+            var copia = new DetalleOperacionesViewModel();
+            var i = 0;
+            foreach (var item in detalle)
+            {
+                if (reg.NroDocumento.Equals(item.NroDocumento) )
+                {
+                    i++;
+
+                    if (i > 1)
+                    {
+                        i++;
+                        inf = "Registro repetido";
+                        
+                    }
+                }
+               
 
 
-
-
-
+            }
             return inf ;
         }
 
 
         #endregion
 
-
+        #region diferenciade fechas a dias
         public static int Diffechas(DateTime fecha1, DateTime fecha2)
         {
             var val = 0;
@@ -88,6 +141,9 @@ namespace WebAplicacion.util
 
             return val;
         }
+        #endregion
+
+        
     }
 
 }

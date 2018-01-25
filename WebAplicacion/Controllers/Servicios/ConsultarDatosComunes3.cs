@@ -22,7 +22,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/1?param1 = " + paramd0+"&param2="+paramd1+"&param3="+paramd2 );
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/1?param1 = " + paramd0+"&param2="+paramd1+"&param3="+paramd2 );
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["DatosDeImpresion"].Children().ToList();
                 foreach (var result in results)
@@ -43,7 +43,7 @@ namespace WebAplicacion.Controllers.Servicios
             return searchResult;
 
         }
-        public async Task<string> VerificaFactura(string paramd0, int paramd1, int paramd2)
+        public async Task<string> VerificaFactura(string paramd0, ulong paramd1, int paramd2)
         {
 
            var searchResult = "" ;
@@ -51,7 +51,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/2?param1=" + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/2?param1=" + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                 var desjson = JObject.Parse(json);
                 //falta buscar valor del string 
                 searchResult = (string)desjson["VerificaFactura"];
@@ -65,7 +65,7 @@ namespace WebAplicacion.Controllers.Servicios
 
         }
 
-        public async Task<string> VerificaDocumento( string paramd0, int paramd1, int paramd2)
+        public async Task<string> VerificaDocumento( string paramd0, ulong paramd1, int paramd2)
         {
 
             var searchResult = "";
@@ -73,7 +73,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/3?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/3?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                 var desjson = JObject.Parse(json);
 
                 searchResult = (string)desjson["VerificaDcto"];
@@ -93,7 +93,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/4?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/4?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                var desjson = JObject.Parse(json);
                 searchResult.Linea = (int)desjson["dtoResponseSetResultados"]["LineaDeCredito"]["Linea"];
                 searchResult.Fecha = (DateTime)desjson["dtoResponseSetResultados"]["LineaDeCredito"]["fecha"];
@@ -116,7 +116,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/5?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/5?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["DeudoresOperacion"].Children().ToList();
                 searchResults.AddRange(results.Select(result => result.ToObject<DeudoresOperacion>()));
@@ -138,7 +138,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/6?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/6?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                 var desjson = JObject.Parse(json);
 
                 searchResult = (string)desjson["dtoResponseSetResultados"]["Comision"];
@@ -162,7 +162,7 @@ namespace WebAplicacion.Controllers.Servicios
             {
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 _cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await _cliente.GetStringAsync("http://localhost:8080/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/7?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
+                var json = await _cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringCargaMasiva/Helpers/ConsultarDatosComunes3/7?param1 = " + paramd0 + "&param2=" + paramd1 + "&param3=" + paramd2);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["AumentoArt84"].Children().ToList();
                 searchResults.AddRange(results.Select(result => result.ToObject<Articulo84>()));

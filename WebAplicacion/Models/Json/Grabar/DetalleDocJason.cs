@@ -31,7 +31,7 @@ namespace WebAplicacion.Models.Json.Grabar
         public string Cuenta { get; set; }
         public int? Remp { get; set; }
         public string Curse { get; set; }
-        public int? NdoctoE { get; set; }
+        public ulong? NdoctoE { get; set; }
         public int? Banco { get; set; }
         public decimal? Anticipo { get; set; }
         public decimal? MontoI { get; set; }

@@ -5,7 +5,7 @@
 
 
 
-@using (Html.BeginForm("Index","Operacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Index","Operacion", FormMethod.Post, new { enctype = "multipart/form-data", id = "Cargamasiva" }))
 {
     @Html.AntiForgeryToken()
     
@@ -175,65 +175,66 @@
    <hr/>
         
     <div class="row ">
-        <div class="cliente" disabled="disabled">
-        <div class="row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Opercion.Comision, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.Comision, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.Comision, "", new {@class = "text-danger"})
-                </div>
+        <fieldset reaonly> 
+   
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opercion.Comision, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.Comision, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.Comision, "", new { @class = "text-danger" })
+            </div>
 
-                @Html.LabelFor(model => model.Opercion.ComisionMin, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.ComisionMin, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.ComisionMin, "", new {@class = "text-danger"})
-                </div>
+            @Html.LabelFor(model => model.Opercion.ComisionMin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.ComisionMin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.ComisionMin, "", new { @class = "text-danger" })
+            </div>
 
-                @Html.LabelFor(model => model.Opercion.ComisionMax, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.ComisionMax, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.ComisionMax, "", new {@class = "text-danger"})
-                </div>
+            @Html.LabelFor(model => model.Opercion.ComisionMax, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.ComisionMax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.ComisionMax, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Opercion.TasaOperacion, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.TasaOperacion, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.TasaOperacion, "", new {@class = "text-danger"})
-                </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opercion.TasaOperacion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.TasaOperacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.TasaOperacion, "", new { @class = "text-danger" })
+            </div>
 
-                @Html.LabelFor(model => model.Opercion.Financiamiento, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.Financiamiento, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.Financiamiento, "", new {@class = "text-danger"})
-                </div>
+            @Html.LabelFor(model => model.Opercion.Financiamiento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.Financiamiento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.Financiamiento, "", new { @class = "text-danger" })
+            </div>
 
-                @Html.LabelFor(model => model.Opercion.Gastosope, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.Gastosope, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.Gastosope, "", new {@class = "text-danger"})
-                </div>
+            @Html.LabelFor(model => model.Opercion.Gastosope, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.Gastosope, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.Gastosope, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Opercion.MontoRemesa, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-2">
-                    @Html.EditorFor(model => model.Opercion.MontoRemesa, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.MontoRemesa, "", new {@class = "text-danger"})
-                </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Opercion.MontoRemesa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Opercion.MontoRemesa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.MontoRemesa, "", new { @class = "text-danger" })
+            </div>
 
-                @Html.LabelFor(model => model.Opercion.AumentArt84, htmlAttributes: new {@class = "control-label col-md-2"})
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.Opercion.AumentArt84, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Opercion.AumentArt84, "", new {@class = "text-danger"})
-                </div>
+            @Html.LabelFor(model => model.Opercion.AumentArt84, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Opercion.AumentArt84, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Opercion.AumentArt84, "", new { @class = "text-danger" })
             </div>
         </div>
-        </div>
+    </div>
+        </fieldset >
     </div>
    
   
@@ -294,7 +295,7 @@
                 </div>
             </div>
             </div>
-
+    
 
             @*<hr />
     <div class="form-group">
@@ -313,15 +314,17 @@
         <div class="col-md-1">
             @Html.ActionLink(" Descargar", "Descargar", null, new { @class = "btn btn-primary fa fa-file-excel-o" })
           </div>
-        <div class="col-md-2">
-            <input type="button" value="Enviar Archivo" name="btnEnviar" id="btnEnviar" class="btn btn-success fa fa-floppy-o" />
-        </div>
+        @*<div class="col-md-2">
+        <input type="button" value="Enviar Archivo" name="btnEnviar" id="btnEnviar" class="btn btn-success fa fa-floppy-o" />
+        </div>*@
         <div class="col-md-4">
-            <input type="file" name="archivo"/>
+            <input type="file" name="archivo" id="cargararchivo"/>
+
         </div>
         <div class="col-md-1">
-            <input type="submit" value="Grabar Operación" name="btnGuardar" id="btnGuardar" class="btn btn-success fa fa-floppy-o" />
+            <input type="button" value="Grabar Operación" name="btnGuardar" id="btnGuardar" class="btn btn-success fa fa-floppy-o" />
         </div>
+        <input type="hidden" value="N" name="valorExtra" id ="valorExtra" />  
     </div>
 
 }
@@ -352,17 +355,7 @@
             });
 
 
-        @*@function clear() {
-            $.ajax({
-                url: "@Url.Action("index", "Operacion")",
-                type: "GET",
-                dataType: "json",
-                contentType: "application/json",
-                success: function(response) {
-
-                }
-            });
-        }*@
+       
 
 
         //$("#btnGuardar").click({
@@ -438,7 +431,7 @@
             var tipodoc = $("#Opercion_TipoDocumento").val();
             var tipomond = $("#Opercion_CodigoMoneda").val();
             var datof = { "rut": rut, "tipodoc": tipodoc, "tipomond": tipomond };
-            alert(datof.rut + " " + datof.tipodoc + " " + datof.tipomond);
+          
             $.ajax({
                 url: "/Clientes/GetClienteDatosFinacieros",
                 type: "POST",
@@ -459,15 +452,18 @@
                 }
             });
            
-            $("#btnEnviar").click(function () {
-                $("#Opercion_Guardar").val("N");
-                $("#form").submit();
+            $("#cargararchivo").change(function () {
+             
+                $("#valorExtra").val("N");
+                alert( $("#valorExtra").val());
+                $("#Cargamasiva").submit();
             });
 
 
             $("#btnGuardar").click(function () {
-                $("#Opercion_Guardar").val("S");
-                $("#form").submit();
+                $("#valorExtra").val("S");
+                alert($("#valorExtra").val());;
+                $("#Cargamasiva").submit();
             });
 
 

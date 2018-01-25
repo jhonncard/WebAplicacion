@@ -41,7 +41,7 @@ namespace WebAplicacion.Controllers
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
+                var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
                 foreach (JToken result in results)
@@ -93,7 +93,7 @@ namespace WebAplicacion.Controllers
 
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
             cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-            var response = await cliente.PostAsJsonAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
+            var response = await cliente.PostAsJsonAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/GrabarCondicionesComerciales", Mappercondiciones(modelo));
 
             return RedirectToAction("Index");
         }
@@ -143,7 +143,7 @@ namespace WebAplicacion.Controllers
             {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", "mZCP5dT9sQn8gLK1IGcPS12xniDB9bcoC38pARZ29g6JZAXb");
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
+                var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarCondicionesComerciales/");
                 JObject desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoCondicionesComerciales"].Children().ToList();
                 foreach (JToken result in results)
@@ -176,7 +176,7 @@ namespace WebAplicacion.Controllers
             try {
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
                 cliente.DefaultRequestHeaders.TryAddWithoutValidation("Token-Authorization", ConfigurationManager.AppSettings["Token-Authorization"]);
-                var json = await cliente.GetStringAsync("http://10.250.13.245:8080/WS_FactoringMantenedores/ConsultarMoneda/" + valor);
+                var json = await cliente.GetStringAsync(ConfigurationManager.AppSettings["servicioBase"] +"/WS_FactoringMantenedores/ConsultarMoneda/" + valor);
                 var desjson = JObject.Parse(json);
                 IList<JToken> results = desjson["dtoResponseSetResultados"]["dtoConsultarMoneda"].Children().ToList();
                 monedas.AddRange(results.Select(result => result.ToObject<MonedaViewModel>()));
