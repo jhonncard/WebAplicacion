@@ -91,14 +91,18 @@ namespace WebAplicacion.Controllers.Servicios
                {
                    item.PaisClass = marca;
                    item.PaisNoti = $"El pais debe ser numerico y no puede ser 0";
-            
+                }
                else if (item.Pais.ToString().IsNullOrWhiteSpace())
                    {
                        item.PaisClass =  marca;
                        item.PaisNoti += $" El pais no puede estar en blanco";
                    }
-               if (item.Plaza.IsNullOrWhiteSpace() )
-                    if (item.plaza)
+               if (item.Plaza.IsNullOrWhiteSpace())
+               {
+                   item.PlazaClass = marca;
+                   item.PlazaNoti += $" La ciudad no puede estar en blanco";
+                }
+              else if (item.plaza)
                 foreach (var ivg in varGraba)
                {
 
